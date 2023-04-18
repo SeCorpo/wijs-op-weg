@@ -62,7 +62,7 @@ public class OVappController
 
       // Initialise the combo box comboA with stopover locations.
       {
-         String[] locations = { "Amsterdam", "Amersfoort", "Arnhem", "Nijmegen", "Utrecht", "Rotterdam", "Vlissingen", "Maastricht", "Groningen" };
+         String[] locations = { "Amersfoort", "Amsterdam", "Arnhem", "Groningen", "Haarlem", "Maastricht", "Nijmegen", "Rotterdam", "Utrecht", "Vlissingen" };
 
          ObservableList<String> list = FXCollections.observableArrayList( locations );
          comboA.setItems( list );
