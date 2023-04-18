@@ -26,7 +26,7 @@
                         <ComboBox fx:id="comboB" onAction="#onComboB" prefWidth="150.0"/>
                     </children>
                 </HBox>
-                <Button fx:id="buttonPlanMyTrip" mnemonicParsing="false" onAction="#onPlanMyTrip" text="Plan my trip"/>
+                <Button fx:id="buttonPlanMyTrip" mnemonicParsing="false" onAction="#onPlanMyTrip" text="Plan mijn reis"/>
             </children>
         </VBox>
         <VBox prefHeight="398.0" prefWidth="248.0">
