@@ -39,9 +39,9 @@ public class OVappController
       System.out.format( "From:   %s\n", comboA.getValue() );
       System.out.format( "To:     %s\n", comboB.getValue() );
 
-      String text = String.format( "%-8s %-15s\n", "OVType:", comboTransport.getValue() );
-      text += String.format( "%-8s %-15s\n", "From:", comboA.getValue() );
-      text += String.format( "%-8s %-15s\n", "To:", comboB.getValue() );
+      String text = String.format( "%-8s %-15s\n", "OV-middel:", comboTransport.getValue() );
+      text += String.format( "%-8s %-15s\n", "Vanaf:", comboA.getValue() );
+      text += String.format( "%-8s %-15s\n", "Naar:", comboB.getValue() );
 
       textArea.setText( text );
    }
