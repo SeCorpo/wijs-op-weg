@@ -8,7 +8,7 @@ import javafx.scene.control.TextArea;
 
 public class OVappController
 {
-   Vehicle vehicle = new Vehicle();
+   Vehicle vehicle = new Vehicle("testOV");
 
    @FXML private ComboBox<String> comboTransport;
    @FXML private ComboBox<String> comboA;
