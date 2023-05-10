@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 //Vehicle heeft reisbare routes en selecteerbare locaties, Data (abc) is een 'mono-morfisme' versie van Vehicle.
+//Vehicle kan worden gezien als de dienstregeling, en heeft functies die elk type vervoermiddel gebruikt (getAllLocations, writeRoute)
 public class Vehicle {
 
     private final String vehicleName;
@@ -14,7 +15,27 @@ public class Vehicle {
     public Vehicle(String vehicleName) {
         this.vehicleName = vehicleName;
     }
+    //Getters standaard return (polymorfisme)
+    public Map<String, Location> getLocationMap() {
+        return locationMap;
+    }
+    public Map<String, Route> getRouteMap() {
+        return routeMap;
+    }
 
+    //FN voor elk vervoermiddel
+    public String getVehicleName() {
+        return vehicleName;
+    }
+    public String[] getAllLocations() {
+        String[] locations = new String[getLocationMap().size()];
+        int i = 0;
+        for(Location location : getLocationMap().values()) {
+            locations[i] = location.getLocationName();
+            i++;
+        }
+        return locations;
+    }
     {
         Location location = new Location("Abcoude");
         locationMap.put(location.getLocationName(), location);
@@ -63,7 +84,6 @@ public class Vehicle {
             route.addStopOver(locationMap.get("Utrecht"), LocalTime.of(hour, 13), LocalTime.of(hour, 21));
             route.addEndPoint(locationMap.get("Amsterdam"), LocalTime.of(hour, 47));
             routeMap.put(route.getKey(), route);
-            route.write();
         }
         // Amsterdam - Utrecht - Amersfoort
         for (int hour = 6; hour <= 22; hour += 1) {
@@ -72,30 +92,6 @@ public class Vehicle {
             route.addStopOver(locationMap.get("Utrecht"), LocalTime.of(hour, 26), LocalTime.of(hour, 34));
             route.addEndPoint(locationMap.get("Amersfoort"), LocalTime.of(hour, 47));
             routeMap.put(route.getKey(), route);
-            route.write();
         }
     }
-
-    //Getters standaard return (polymorfisme)
-    public Map<String, Location> getLocationMap() {
-        return locationMap;
-    }
-    public Map<String, Route> getRouteMap() {
-        return routeMap;
-    }
-    public String getVehicleName() {
-        return vehicleName;
-    }
-
-    //FN
-    public String[] getAllLocations() {
-        String[] locations = new String[getLocationMap().size()];
-        int i = 0;
-        for(Location location : getLocationMap().values()) {
-            locations[i] = location.getLocationName();
-            i++;
-        }
-        return locations;
-    }
-
 }

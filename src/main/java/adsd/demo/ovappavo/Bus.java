@@ -4,12 +4,12 @@ import java.time.LocalTime;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Train extends Vehicle {
+public class Bus extends Vehicle {
 
     private final Map<String, Location> locationMap = new TreeMap<>();
     private final Map<String, Route> routeMap = new TreeMap<>();
 
-    public Train(String vehicleName) {
+    Bus(String vehicleName) {
         super(vehicleName);
     }
     //Getters standaard return (polymorfisme)
@@ -22,10 +22,16 @@ public class Train extends Vehicle {
         return routeMap;
     }
     {
-        Location location = new Location("Amersfoort");
+        Location location = new Location("Abcoude");
+        locationMap.put(location.getLocationName(), location);
+
+        location = new Location("Amersfoort");
         locationMap.put(location.getLocationName(), location);
 
         location = new Location("Amsterdam");
+        locationMap.put(location.getLocationName(), location);
+
+        location = new Location("Emmen");
         locationMap.put(location.getLocationName(), location);
 
         location = new Location("Groningen");
@@ -48,38 +54,25 @@ public class Train extends Vehicle {
 
         location = new Location("Vlissingen");
         locationMap.put(location.getLocationName(), location);
+
+        location = new Location("Xanten");
+        locationMap.put(location.getLocationName(), location);
     }
     {
         //Amersfoort - Utrecht - Amsterdam
-        for (int hour = 6; hour <= 22; hour += 1) {
+        for (int hour = 8; hour <= 21; hour += 2) {
             LocalTime timeOfDeparture = LocalTime.of(hour, 0);
             Route route = new Route(locationMap.get("Amersfoort"), timeOfDeparture);
-            route.addStopOver(locationMap.get("Utrecht"), LocalTime.of(hour, 13), LocalTime.of(hour, 21));
-            route.addEndPoint(locationMap.get("Amsterdam"), LocalTime.of(hour, 47));
+            route.addStopOver(locationMap.get("Utrecht"), LocalTime.of(hour, 54), LocalTime.of(hour, 58));
+            route.addEndPoint(locationMap.get("Amsterdam"), LocalTime.of(hour + 3, 26));
             routeMap.put(route.getKey(), route);
         }
         //Amsterdam - Utrecht - Amersfoort
-        for (int hour = 6; hour <= 22; hour += 1) {
+        for (int hour = 8; hour <= 21; hour += 2) {
             LocalTime timeOfDeparture = LocalTime.of(hour, 0);
             Route route = new Route(locationMap.get("Amsterdam"), timeOfDeparture);
-            route.addStopOver(locationMap.get("Utrecht"), LocalTime.of(hour, 26), LocalTime.of(hour, 34));
-            route.addEndPoint(locationMap.get("Amersfoort"), LocalTime.of(hour, 47));
-            routeMap.put(route.getKey(), route);
-        }
-        //Groningen - Nijmegen - Maastricht
-        for (int hour = 6; hour <= 20; hour += 2) {
-            LocalTime timeOfDeparture = LocalTime.of(hour, 30);
-            Route route = new Route(locationMap.get("Groningen"), timeOfDeparture);
-            route.addStopOver(locationMap.get("Nijmegen"), LocalTime.of(hour + 2, 36), LocalTime.of(hour + 2, 46)); //2uur,6min + 10
-            route.addEndPoint(locationMap.get("Maastricht"), LocalTime.of(hour + 3, 59)); //1uur,13min
-            routeMap.put(route.getKey(), route);
-        }
-        //Maastricht - Nijmegen - Groningen
-        for (int hour = 6; hour <= 20; hour += 2) {
-            LocalTime timeOfDeparture = LocalTime.of(hour, 30);
-            Route route = new Route(locationMap.get("Maastricht"), timeOfDeparture);
-            route.addStopOver(locationMap.get("Nijmegen"), LocalTime.of(hour + 1, 43), LocalTime.of(hour + 1, 53));
-            route.addEndPoint(locationMap.get("Groningen"), LocalTime.of(hour + 3, 59));
+            route.addStopOver(locationMap.get("Utrecht"), LocalTime.of(hour + 2, 28), LocalTime.of(hour, 32));
+            route.addEndPoint(locationMap.get("Amersfoort"), LocalTime.of(hour + 3, 30));
             routeMap.put(route.getKey(), route);
         }
     }
