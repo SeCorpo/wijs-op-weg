@@ -3,6 +3,7 @@ package adsd.demo.ovappavo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 
@@ -13,8 +14,19 @@ public class OVappController
    @FXML private ComboBox<String> comboTransport;
    @FXML private ComboBox<String> comboA;
    @FXML private ComboBox<String> comboB;
-   @FXML private TextArea         textArea;
+   @FXML private Button buttonPlanMyTrip;
+   @FXML private TextArea textArea;
 
+   public void initialize() {
+
+      setComboTransport();
+      setComboA();
+      setComboB();
+
+      System.out.println( "init TransportSelectorController done" );
+   }
+
+   // ACTION EVENT
    @FXML protected void onComboA() {
       System.out.println( "OVappController.onComboA" );
    }
@@ -37,21 +49,13 @@ public class OVappController
       textArea.setText( text );
    }
 
-   // Important method to initialize this Controller object!!!
-   public void initialize() {
-      // Initialise the combo box comboTransport with transportation types ...
-      {
-         String[] ovtypes = { "taxi", "plane", "train", "tram", "bus" };
+   // SETTERS
+   private void setComboTransport() {
+      String[] ovtypes = { "taxi", "plane", "train", "tram", "bus" };
 
-         ObservableList<String> list = FXCollections.observableArrayList( ovtypes );
-         comboTransport.setItems( list );
-         comboTransport.getSelectionModel().select( 2 ); // i.e. "train"
-      }
-
-      setComboA();
-      setComboB();
-
-      System.out.println( "init TransportSelectorController done" );
+      ObservableList<String> list = FXCollections.observableArrayList( ovtypes );
+      comboTransport.setItems( list );
+      comboTransport.getSelectionModel().select( 2 );
    }
    private void setComboA() {
       ObservableList<String> currentVehicleLocationList = FXCollections.observableArrayList(vehicle.getAllLocations());
