@@ -8,6 +8,8 @@ import javafx.scene.control.TextArea;
 
 public class OVappController
 {
+   Data data = new Data();
+
    @FXML private ComboBox<String> comboTransport;
    @FXML private ComboBox<String> comboA;
    @FXML private ComboBox<String> comboB;
@@ -62,11 +64,10 @@ public class OVappController
 
       // Initialise the combo box comboA with stopover locations.
       {
-         String[] locations = { "Abcoude", "Amersfoort", "Amsterdam", "Arnhem", "Emmen", "Groningen", "Haarlem", "Maastricht", "Nijmegen", "Rotterdam", "Utrecht", "Vlissingen", "Xanten" };
 
-         ObservableList<String> list = FXCollections.observableArrayList( locations );
+         ObservableList<String> list = FXCollections.observableArrayList(data.getAllLocations());
          comboA.setItems( list );
-         comboA.getSelectionModel().select( 0 ); // i.e. "Amsterdam"
+         comboA.getSelectionModel().select( 0 );
 
          comboB.setItems( list );
          comboB.getSelectionModel().select( comboB.getItems().size() - 1 );
