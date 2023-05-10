@@ -8,7 +8,7 @@ import javafx.scene.control.TextArea;
 
 public class OVappController
 {
-   Data data = new Data();
+   Vehicle vehicle = new Vehicle();
 
    @FXML private ComboBox<String> comboTransport;
    @FXML private ComboBox<String> comboA;
@@ -65,7 +65,7 @@ public class OVappController
       // Initialise the combo box comboA with stopover locations.
       {
 
-         ObservableList<String> list = FXCollections.observableArrayList(data.getAllLocations());
+         ObservableList<String> list = FXCollections.observableArrayList(vehicle.getAllLocations());
          comboA.setItems( list );
          comboA.getSelectionModel().select( 0 );
 

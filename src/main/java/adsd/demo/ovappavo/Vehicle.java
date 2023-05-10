@@ -4,13 +4,18 @@ import java.time.LocalTime;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Data {
+//Vehicle heeft reisbare routes en selecteerbare locaties
+public class Vehicle {
 
+    private final String vehicleName;
     private final Map<String, Location> locationMap = new TreeMap<>();
     private final Map<String, Route> routeMap = new TreeMap<>();
 
-    public Data() {
+    public Vehicle(String vehicleName) {
+        this.vehicleName = vehicleName;
+    }
 
+    {
         Location location = new Location("Abcoude");
         locationMap.put(location.getLocationName(), location);
 
@@ -49,9 +54,10 @@ public class Data {
 
         location = new Location("Xanten");
         locationMap.put(location.getLocationName(), location);
-
+    }
+    {
         // Amersfoort - Utrecht - Amsterdam
-        for(int hour = 6; hour <= 22; hour += 1) {
+        for (int hour = 6; hour <= 22; hour += 1) {
             LocalTime timeOfDeparture = LocalTime.of(hour, 0);
             Route route = new Route(locationMap.get("Amersfoort"), timeOfDeparture);
             route.addStopOver(locationMap.get("Utrecht"), LocalTime.of(hour, 13), LocalTime.of(hour, 21));
@@ -60,7 +66,7 @@ public class Data {
             route.write();
         }
         // Amsterdam - Utrecht - Amersfoort
-        for(int hour = 6; hour <= 22; hour += 1) {
+        for (int hour = 6; hour <= 22; hour += 1) {
             LocalTime timeOfDeparture = LocalTime.of(hour, 0);
             Route route = new Route(locationMap.get("Amsterdam"), timeOfDeparture);
             route.addStopOver(locationMap.get("Utrecht"), LocalTime.of(hour, 26), LocalTime.of(hour, 34));
@@ -70,17 +76,26 @@ public class Data {
         }
     }
 
+    //Getters standaard return (polymorfisme)
+    public Map<String, Location> getLocationMap() {
+        return locationMap;
+    }
+    public Map<String, Route> getRouteMap() {
+        return routeMap;
+    }
+    public String getVehicleName() {
+        return vehicleName;
+    }
+
+    //FN
     public String[] getAllLocations() {
-        String[] locations = new String[locationMap.size()];
+        String[] locations = new String[getLocationMap().size()];
         int i = 0;
-        for(Location location : locationMap.values()) {
+        for(Location location : getLocationMap().values()) {
             locations[i] = location.getLocationName();
             i++;
         }
         return locations;
     }
 
-    public Map<String, Route> getRouteMap() {
-        return routeMap;
-    }
 }
