@@ -12,7 +12,7 @@ public class Bus extends Vehicle {
     Bus(String vehicleName) {
         super(vehicleName);
     }
-    //Getters standaard return (polymorfisme)
+    //FN_///////////////////////////////////////////////////////////
     @Override
     public Map<String, Location> getLocationMap() {
         return locationMap;
@@ -21,42 +21,21 @@ public class Bus extends Vehicle {
     public Map<String, Route> getRouteMap() {
         return routeMap;
     }
+
+    //DATA_/////////////////////////////////////////////////////////
     {
-        Location location = new Location("Abcoude");
-        locationMap.put(location.getLocationName(), location);
-
-        location = new Location("Amersfoort");
-        locationMap.put(location.getLocationName(), location);
-
-        location = new Location("Amsterdam");
-        locationMap.put(location.getLocationName(), location);
-
-        location = new Location("Emmen");
-        locationMap.put(location.getLocationName(), location);
-
-        location = new Location("Groningen");
-        locationMap.put(location.getLocationName(), location);
-
-        location = new Location("Haarlem");
-        locationMap.put(location.getLocationName(), location);
-
-        location = new Location("Maastricht");
-        locationMap.put(location.getLocationName(), location);
-
-        location = new Location("Nijmegen");
-        locationMap.put(location.getLocationName(), location);
-
-        location = new Location("Rotterdam");
-        locationMap.put(location.getLocationName(), location);
-
-        location = new Location("Utrecht");
-        locationMap.put(location.getLocationName(), location);
-
-        location = new Location("Vlissingen");
-        locationMap.put(location.getLocationName(), location);
-
-        location = new Location("Xanten");
-        locationMap.put(location.getLocationName(), location);
+        addLocation("Abcoude");
+        addLocation("Amersfoort");
+        addLocation("Amsterdam");
+        addLocation("Emmen");
+        addLocation("Groningen");
+        addLocation("Haarlem");
+        addLocation("Maastricht");
+        addLocation("Nijmegen");
+        addLocation("Rotterdam");
+        addLocation("Utrecht");
+        addLocation("Vlissingen");
+        addLocation("Xanten");
     }
     {
         //Amersfoort - Utrecht - Amsterdam

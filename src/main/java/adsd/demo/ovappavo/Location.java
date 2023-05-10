@@ -7,7 +7,7 @@ public class Location {
     Location(String locationName) {
         this.locationName = locationName;
     }
-
+    //FN_///////////////////////////////////////////////////////////
     public String getLocationName() {
         return locationName;
     }

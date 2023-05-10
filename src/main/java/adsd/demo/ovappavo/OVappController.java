@@ -26,7 +26,7 @@ public class OVappController
       System.out.println( "init TransportSelectorController done" );
    }
 
-   // ACTION EVENT
+   // ACTION EVENTS
    @FXML protected void onComboA() {
       System.out.println( "OVappController.onComboA" );
    }
@@ -53,17 +53,19 @@ public class OVappController
    private void setComboTransport() {
       String[] ovtypes = { "taxi", "plane", "train", "tram", "bus" };
 
-      ObservableList<String> list = FXCollections.observableArrayList( ovtypes );
+      ObservableList<String> list = FXCollections.observableArrayList( ovtypes );                                       //todo: vehicleMap
       comboTransport.setItems( list );
       comboTransport.getSelectionModel().select( 2 );
    }
    private void setComboA() {
-      ObservableList<String> currentVehicleLocationList = FXCollections.observableArrayList(vehicle.getAllLocations());
+      ObservableList<String> currentVehicleLocationList = FXCollections.observableArrayList();
+      currentVehicleLocationList.addAll(vehicle.getLocationMap().keySet());                                             //todo: currentVehicle
       comboA.setItems(currentVehicleLocationList);
       comboA.getSelectionModel().select(0);
    }
    private void setComboB() {
-      ObservableList<String> currentVehicleLocationList = FXCollections.observableArrayList(vehicle.getAllLocations());
+      ObservableList<String> currentVehicleLocationList = FXCollections.observableArrayList();
+      currentVehicleLocationList.addAll(vehicle.getLocationMap().keySet());                                             //todo: currentVehicle
       comboB.setItems(currentVehicleLocationList);
       comboB.getSelectionModel().select(comboB.getItems().size() - 1);
    }
