@@ -15,27 +15,16 @@ public class OVappController
    @FXML private ComboBox<String> comboB;
    @FXML private TextArea         textArea;
 
-   @FXML
-   public void onComboA()
-   {
+   @FXML protected void onComboA() {
       System.out.println( "OVappController.onComboA" );
    }
-
-   @FXML
-   public void onComboB()
-   {
+   @FXML protected void onComboB() {
       System.out.println( "OVappController.onComboB" );
    }
-
-   @FXML
-   protected void onTransport()
-   {
+   @FXML protected void onTransport() {
       System.out.print( "OVappController.onTransportChange" );
    }
-
-   @FXML
-   protected void onPlanMyTrip()
-   {
+   @FXML protected void onButtonPlanMyTrip() {
       System.out.println( "OVappController.onPlanMyTrip" );
       System.out.format( "OVType: %s\n", comboTransport.getValue() );
       System.out.format( "From:   %s\n", comboA.getValue() );
@@ -49,10 +38,7 @@ public class OVappController
    }
 
    // Important method to initialize this Controller object!!!
-   public void initialize()
-   {
-      System.out.println( "init TransportSelectorController ..." );
-
+   public void initialize() {
       // Initialise the combo box comboTransport with transportation types ...
       {
          String[] ovtypes = { "taxi", "plane", "train", "tram", "bus" };
@@ -62,18 +48,19 @@ public class OVappController
          comboTransport.getSelectionModel().select( 2 ); // i.e. "train"
       }
 
-      // Initialise the combo box comboA with stopover locations.
-      {
-
-         ObservableList<String> list = FXCollections.observableArrayList(vehicle.getAllLocations());
-         comboA.setItems( list );
-         comboA.getSelectionModel().select( 0 );
-
-         comboB.setItems( list );
-         comboB.getSelectionModel().select( comboB.getItems().size() - 1 );
-      }
+      setComboA();
+      setComboB();
 
       System.out.println( "init TransportSelectorController done" );
    }
-
+   private void setComboA() {
+      ObservableList<String> currentVehicleLocationList = FXCollections.observableArrayList(vehicle.getAllLocations());
+      comboA.setItems(currentVehicleLocationList);
+      comboA.getSelectionModel().select(0);
+   }
+   private void setComboB() {
+      ObservableList<String> currentVehicleLocationList = FXCollections.observableArrayList(vehicle.getAllLocations());
+      comboB.setItems(currentVehicleLocationList);
+      comboB.getSelectionModel().select(comboB.getItems().size() - 1);
+   }
 }
