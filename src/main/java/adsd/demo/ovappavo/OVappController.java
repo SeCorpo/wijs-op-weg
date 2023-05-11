@@ -9,7 +9,17 @@ import javafx.scene.control.TextArea;
 
 public class OVappController
 {
-   Vehicle vehicle = new Vehicle("testOV");
+
+   public Vehicle currentVehicle;
+
+   public Vehicle getCurrentVehicle() {
+         if(currentVehicle == null) {
+            currentVehicle = new Vehicle("StarLiteOV");
+         } return currentVehicle;
+   }
+   public void setCurrentVehicle(Vehicle currentVehicle) {
+      this.currentVehicle = currentVehicle;
+   }
 
    @FXML private ComboBox<String> comboTransport;
    @FXML private ComboBox<String> comboA;
@@ -59,13 +69,13 @@ public class OVappController
    }
    private void setComboA() {
       ObservableList<String> currentVehicleLocationList = FXCollections.observableArrayList();
-      currentVehicleLocationList.addAll(vehicle.getLocationMap().keySet());                                             //todo: currentVehicle
+      currentVehicleLocationList.addAll(getCurrentVehicle().getLocationMap().keySet());
       comboA.setItems(currentVehicleLocationList);
       comboA.getSelectionModel().select(0);
    }
    private void setComboB() {
       ObservableList<String> currentVehicleLocationList = FXCollections.observableArrayList();
-      currentVehicleLocationList.addAll(vehicle.getLocationMap().keySet());                                             //todo: currentVehicle
+      currentVehicleLocationList.addAll(getCurrentVehicle().getLocationMap().keySet());
       comboB.setItems(currentVehicleLocationList);
       comboB.getSelectionModel().select(comboB.getItems().size() - 1);
    }
