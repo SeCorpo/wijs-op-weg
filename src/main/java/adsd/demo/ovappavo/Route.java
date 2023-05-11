@@ -2,6 +2,7 @@ package adsd.demo.ovappavo;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Route {
 
@@ -46,6 +47,13 @@ public class Route {
         } else {
             System.out.format("%-6s [%-13s] %-4s %-10s %-2s %-2s %-5s %-4s %-8s %-2s %-2s %-5s\n", "Route:", getKey(), " ", "Departure: ", first.getLocationName(), "at ",
                     first.getTimeOfDeparture(), " ", "Arrival: ", last.getLocationName(), "at ", last.getTimeOfArrival());
+        }
+    }
+    public void writeTrip(List<StopOver> trip) {
+        System.out.println("@Track.writeRoute :: Route from: " + trip.get(0).getLocationName() + " to: " +
+                trip.get(trip.size() - 1).getLocationName() + " @ " + trip.get(0).getTimeOfDeparture().toString());
+        for (int i = 0; i < trip.size(); i++) {
+            System.out.println("Location: " + trip.get(i).getLocationName() + " @ " + trip.get(i).getTimeOfArrival());
         }
     }
 }
