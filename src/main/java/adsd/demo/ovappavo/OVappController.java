@@ -53,11 +53,13 @@ public class OVappController
 
       // Initialise the combo box comboTransport with transportation types ...
       {
-         String[] ovtypes = { "bus", "tram", "train", "plane" };
+         String[] ovtypes = { "Bus","Trein" };
 
          ObservableList<String> list = FXCollections.observableArrayList( ovtypes );
          comboTransport.setItems( list );
-         comboTransport.getSelectionModel().select( 2 ); // i.e. "train"
+
+
+
       }
 
       // Initialise the combo box comboA with stopover locations.
@@ -66,10 +68,10 @@ public class OVappController
 
          ObservableList<String> list = FXCollections.observableArrayList( locations );
          comboA.setItems( list );
-         comboA.getSelectionModel().select( 0 ); // i.e. "Amsterdam"
+
 
          comboB.setItems( list );
-         comboB.getSelectionModel().select( comboB.getItems().size() - 1 );
+
       }
 
       System.out.println( "init TransportSelectorController done" );
