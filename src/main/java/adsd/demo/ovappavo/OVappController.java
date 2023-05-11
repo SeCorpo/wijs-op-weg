@@ -7,14 +7,27 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 public class OVappController
 {
+   private Map<String, Vehicle> vehicleMap = new TreeMap<>();
+   Vehicle vehicle = new Vehicle("Vehicle");
+   Train train = new Train("Train");
+   Bus bus = new Bus("Bus");
+   {
+      vehicleMap.put(vehicle.getVehicleName(), vehicle);
+      vehicleMap.put(train.getVehicleName(), train);
+      vehicleMap.put(bus.getVehicleName(), bus);
+   }
 
-   public Vehicle currentVehicle;
+   private Vehicle currentVehicle;
 
    public Vehicle getCurrentVehicle() {
          if(currentVehicle == null) {
-            currentVehicle = new Vehicle("StarLiteOV");
+            currentVehicle = new Vehicle("VehicleNull");
+
          } return currentVehicle;
    }
    public void setCurrentVehicle(Vehicle currentVehicle) {
@@ -33,39 +46,41 @@ public class OVappController
       setComboA();
       setComboB();
 
-      System.out.println( "init TransportSelectorController done" );
+      System.out.println("init TransportSelectorController done");
    }
 
    // ACTION EVENTS
    @FXML protected void onComboA() {
-      System.out.println( "OVappController.onComboA" );
+      System.out.println("OVappController.onComboA :: to: " + comboA.getValue());
    }
    @FXML protected void onComboB() {
-      System.out.println( "OVappController.onComboB" );
+      System.out.println("OVappController.onComboB :: to: " + comboB.getValue());
    }
    @FXML protected void onTransport() {
-      System.out.print( "OVappController.onTransportChange" );
+      setCurrentVehicle(vehicleMap.get(comboTransport.getValue()));
+      setComboA();
+      setComboB();
+      System.out.println("OVappController.onTransportChange :: to: " + comboTransport.getValue());
    }
    @FXML protected void onButtonPlanMyTrip() {
-      System.out.println( "OVappController.onPlanMyTrip" );
-      System.out.format( "OVType: %s\n", comboTransport.getValue() );
-      System.out.format( "From:   %s\n", comboA.getValue() );
-      System.out.format( "To:     %s\n", comboB.getValue() );
+      System.out.println("OVappController.onPlanMyTrip");
+      System.out.format("OVType: %s\n", comboTransport.getValue());
+      System.out.format("From:   %s\n", comboA.getValue());
+      System.out.format("To:     %s\n", comboB.getValue());
 
-      String text = String.format( "%-8s %-15s\n", "OV-middel:", comboTransport.getValue() );
-      text += String.format( "%-8s %-15s\n", "Vanaf:", comboA.getValue() );
-      text += String.format( "%-8s %-15s\n", "Naar:", comboB.getValue() );
+      String text = String.format("%-8s %-15s\n", "OV-middel:", comboTransport.getValue());
+      text += String.format("%-8s %-15s\n", "Vanaf:", comboA.getValue());
+      text += String.format("%-8s %-15s\n", "Naar:", comboB.getValue());
 
       textArea.setText( text );
    }
 
    // SETTERS
    private void setComboTransport() {
-      String[] ovtypes = { "taxi", "plane", "train", "tram", "bus" };
-
-      ObservableList<String> list = FXCollections.observableArrayList( ovtypes );                                       //todo: vehicleMap
-      comboTransport.setItems( list );
-      comboTransport.getSelectionModel().select( 2 );
+      ObservableList<String> vehicleList = FXCollections.observableArrayList();
+      vehicleList.addAll(vehicleMap.keySet());
+      comboTransport.setItems(vehicleList);
+      comboTransport.getSelectionModel().select(2);
    }
    private void setComboA() {
       ObservableList<String> currentVehicleLocationList = FXCollections.observableArrayList();

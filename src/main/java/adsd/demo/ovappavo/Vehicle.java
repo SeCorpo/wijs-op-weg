@@ -25,9 +25,9 @@ public class Vehicle {
     public String getVehicleName() {
         return vehicleName;
     }
-    protected void addLocation(String locationNameToAdd) {
+    private void addLocation(String locationNameToAdd) {
         Location locationToAdd = new Location(locationNameToAdd);
-        getLocationMap().put(locationToAdd.getLocationName(), locationToAdd);
+        locationMap.put(locationToAdd.getLocationName(), locationToAdd);
     }
 
     //DATA_/////////////////////////////////////////////////////////
@@ -65,5 +65,6 @@ public class Vehicle {
             route.write();
         }
     }
+
 }
 

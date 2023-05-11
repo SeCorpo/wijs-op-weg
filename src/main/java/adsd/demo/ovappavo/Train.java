@@ -21,7 +21,10 @@ public class Train extends Vehicle {
     public Map<String, Route> getRouteMap() {
         return routeMap;
     }
-
+    private void addLocation(String locationNameToAdd) {
+        Location locationToAdd = new Location(locationNameToAdd);
+        locationMap.put(locationToAdd.getLocationName(), locationToAdd);
+    }
     //DATA_/////////////////////////////////////////////////////////
     {
         addLocation("Amersfoort");
