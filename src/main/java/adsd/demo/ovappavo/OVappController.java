@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
-
+import java.time.LocalTime;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -27,7 +27,11 @@ public class OVappController
    public Vehicle getCurrentVehicle() {
          if(currentVehicle == null) {
             currentVehicle = new Vehicle("VehicleNull");
-
+            try {
+               vehicleMap.put(currentVehicle.getVehicleName(), currentVehicle);
+            } catch (Exception e) {
+               System.err.println("Cant put new currentVehicle 'VehicleNull' in vehicleMap");
+            }
          } return currentVehicle;
    }
    public void setCurrentVehicle(Vehicle currentVehicle) {
@@ -63,6 +67,12 @@ public class OVappController
       System.out.println("OVappController.onTransportChange :: to: " + comboTransport.getValue());
    }
    @FXML protected void onButtonPlanMyTrip() {
+      String beginStop = comboA.getValue();
+      String endStop = comboB.getValue();
+      LocalTime beginTime = LocalTime.of(12,0);                                                             // todo: connect to spinner
+
+      getCurrentVehicle().findTrip(beginStop, endStop, beginTime);
+
       System.out.println("OVappController.onPlanMyTrip");
       System.out.format("OVType: %s\n", comboTransport.getValue());
       System.out.format("From:   %s\n", comboA.getValue());
@@ -73,6 +83,7 @@ public class OVappController
       text += String.format("%-8s %-15s\n", "Naar:", comboB.getValue());
 
       textArea.setText( text );
+      textArea.setText(getCurrentVehicle().buildTripText(getCurrentVehicle().findTrip(beginStop, endStop, beginTime)));
    }
 
    // SETTERS
@@ -94,4 +105,5 @@ public class OVappController
       comboB.setItems(currentVehicleLocationList);
       comboB.getSelectionModel().select(comboB.getItems().size() - 1);
    }
+
 }
