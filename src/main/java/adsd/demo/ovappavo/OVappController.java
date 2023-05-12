@@ -5,8 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -41,6 +43,7 @@ public class OVappController
    @FXML private ComboBox<String> comboTransport;
    @FXML private ComboBox<String> comboA;
    @FXML private ComboBox<String> comboB;
+   @FXML private Spinner spinnerTime;
    @FXML private Button buttonPlanMyTrip;
    @FXML private TextArea textArea;
 
@@ -49,6 +52,7 @@ public class OVappController
       setComboTransport();
       setComboA();
       setComboB();
+      setSpinnerTime();
 
       System.out.println("init TransportSelectorController done");
    }
@@ -70,6 +74,7 @@ public class OVappController
       String beginStop = comboA.getValue();
       String endStop = comboB.getValue();
       LocalTime beginTime = LocalTime.of(12,0);                                                             // todo: connect to spinner
+      //LocalTime beginTime = spinnerTime.getValue();
 
       getCurrentVehicle().findTrip(beginStop, endStop, beginTime);
 
@@ -104,6 +109,9 @@ public class OVappController
       currentVehicleLocationList.addAll(getCurrentVehicle().getLocationMap().keySet());
       comboB.setItems(currentVehicleLocationList);
       comboB.getSelectionModel().select(comboB.getItems().size() - 1);
+   }
+   private void setSpinnerTime() {
+      spinnerTime.getEditor().textProperty().set(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
    }
 
 }
