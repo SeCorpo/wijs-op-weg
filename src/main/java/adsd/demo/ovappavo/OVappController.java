@@ -3,12 +3,10 @@ package adsd.demo.ovappavo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -73,7 +71,7 @@ public class OVappController
    @FXML protected void onButtonPlanMyTrip() {
       String beginStop = comboA.getValue();
       String endStop = comboB.getValue();
-      LocalTime beginTime = LocalTime.of(12,0);                                                             // todo: connect to spinner
+      LocalTime beginTime = LocalTime.parse(spinnerTime.getValue().toString());
       //LocalTime beginTime = spinnerTime.getValue();
 
       getCurrentVehicle().findTrip(beginStop, endStop, beginTime);
@@ -89,6 +87,7 @@ public class OVappController
 
       textArea.setText( text );
       textArea.setText(getCurrentVehicle().buildTripText(getCurrentVehicle().findTrip(beginStop, endStop, beginTime)));
+
    }
 
    // SETTERS
@@ -111,7 +110,29 @@ public class OVappController
       comboB.getSelectionModel().select(comboB.getItems().size() - 1);
    }
    private void setSpinnerTime() {
-      spinnerTime.getEditor().textProperty().set(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
+      spinnerTime.setValueFactory(factory);
+      //spinnerTime.getEditor().textProperty().set(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
    }
+
+   SpinnerValueFactory<LocalTime> factory = new SpinnerValueFactory<LocalTime>() {
+      {
+         setValue(timeNow());
+      }
+      private LocalTime timeNow() {
+         return LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
+      }
+      @Override
+      public void decrement(int minutes) {
+         LocalTime time = getValue();
+         setValue(time == null ? timeNow() : time.minusMinutes(minutes * 5));
+      }
+      @Override
+      public void increment(int minutes) {
+         LocalTime time = getValue();
+         setValue(time == null ? timeNow() : time.plusMinutes(minutes * 5));
+      }
+   };
+
+
 
 }

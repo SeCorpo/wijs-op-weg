@@ -104,12 +104,14 @@ public class Vehicle {
                 }
             }
 
-            if(beginLocationFound && endLocationFound && beginTimeFound && beginLocation.getTimeOfDeparture().isBefore(endLocation.getTimeOfDeparture())) {
+            if(beginLocationFound && endLocationFound && beginTimeFound && beginLocation.getTimeOfDeparture().isBefore(endLocation.getTimeOfArrival())) {
                 List<StopOver> trip = new ArrayList<>();
 
                 for (int i = listBegin; i <= listEnd; i++) {
                     trip.add(route.getStopOvers().get(i));
                 }
+                Route route1 = new Route((ArrayList<StopOver>) trip);
+                //todo: add route1 to currentUser > find location for currentUser (if currentUser != "currentUser" aka null)
                 return trip;
             }
         }

@@ -2,14 +2,18 @@ package adsd.demo.ovappavo;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Route {
 
-    private final ArrayList<StopOver> stopOvers = new ArrayList<>();
+    private ArrayList<StopOver> stopOvers = new ArrayList<>();
 
     Route(Location beginLocation, LocalTime timeOfDeparture) {
         StopOver stopOver = new StopOver(beginLocation.getLocationName(), timeOfDeparture, timeOfDeparture);
         stopOvers.add(stopOver);
+    }
+    Route(ArrayList<StopOver> stopOvers) {
+        this.stopOvers = stopOvers;
     }
     //FN_///////////////////////////////////////////////////////////
     public ArrayList<StopOver> getStopOvers() {
