@@ -12,6 +12,7 @@ import java.util.TreeMap;
 
 public class OVappController
 {
+   // VEHICLE MAP
    private Map<String, Vehicle> vehicleMap = new TreeMap<>();
    Vehicle vehicle = new Vehicle("Vehicle");
    Train train = new Train("Train");
@@ -22,22 +23,24 @@ public class OVappController
       vehicleMap.put(bus.getVehicleName(), bus);
    }
 
+   // CURRENT VEHICLE
    private Vehicle currentVehicle;
-
    public Vehicle getCurrentVehicle() {
          if(currentVehicle == null) {
-            currentVehicle = new Vehicle("VehicleNull");
-            try {
-               vehicleMap.put(currentVehicle.getVehicleName(), currentVehicle);
-            } catch (Exception e) {
-               System.err.println("Cant put new currentVehicle 'VehicleNull' in vehicleMap");
-            }
+            Vehicle vehicle1 = new Vehicle("VehicleNull");
+            setCurrentVehicle(vehicle1);
          } return currentVehicle;
    }
    public void setCurrentVehicle(Vehicle currentVehicle) {
       this.currentVehicle = currentVehicle;
+      try {
+         vehicleMap.put(currentVehicle.getVehicleName(), currentVehicle);
+      } catch (Exception e) {
+         System.err.println("Cant put new currentVehicle 'VehicleNull' in vehicleMap");
+      }
    }
 
+   // FXML OBJECTS
    @FXML private ComboBox<String> comboTransport;
    @FXML private ComboBox<String> comboA;
    @FXML private ComboBox<String> comboB;
@@ -110,23 +113,21 @@ public class OVappController
       comboB.getSelectionModel().select(comboB.getItems().size() - 1);
    }
    private void setSpinnerTime() {
-      spinnerTime.setValueFactory(factory);
+      spinnerTime.setValueFactory(spinnerTimeController);
       //spinnerTime.getEditor().textProperty().set(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
    }
 
-   SpinnerValueFactory<LocalTime> factory = new SpinnerValueFactory<LocalTime>() {
+   SpinnerValueFactory<LocalTime> spinnerTimeController = new SpinnerValueFactory<>() {
       {
          setValue(timeNow());
       }
       private LocalTime timeNow() {
          return LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
       }
-      @Override
       public void decrement(int minutes) {
          LocalTime time = getValue();
          setValue(time == null ? timeNow() : time.minusMinutes(minutes * 5));
       }
-      @Override
       public void increment(int minutes) {
          LocalTime time = getValue();
          setValue(time == null ? timeNow() : time.plusMinutes(minutes * 5));
