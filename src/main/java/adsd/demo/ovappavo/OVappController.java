@@ -49,6 +49,14 @@ public class OVappController
 
    public void initialize() {
 
+      Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e ->
+              labelClock.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")))
+      ),
+              new KeyFrame(Duration.seconds(1))
+      );
+      clock.setCycleCount(Animation.INDEFINITE);
+      clock.play();
+
       setComboTransport();
       setComboA();
       setComboB();
