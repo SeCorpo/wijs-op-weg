@@ -1,10 +1,15 @@
 package adsd.demo.ovappavo;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.util.Duration;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
@@ -47,6 +52,7 @@ public class OVappController
    @FXML private Spinner spinnerTime;
    @FXML private Button buttonPlanMyTrip;
    @FXML private TextArea textArea;
+   @FXML private Label labelClock;
 
    public void initialize() {
 
