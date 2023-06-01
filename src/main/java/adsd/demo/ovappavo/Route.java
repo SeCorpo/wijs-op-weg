@@ -52,4 +52,10 @@ public class Route {
                     first.getTimeOfDeparture(), " ", "Arrival: ", last.getLocationName(), "at ", last.getTimeOfArrival());
         }
     }
+    public String fromToATString(Route route) {
+        String from = route.getStopOvers().get(0).getLocationName();
+        String to = route.getStopOvers().get(route.getStopOvers().size()-1).getLocationName();
+        String at = route.getStopOvers().get(0).getTimeOfDeparture().toString();
+        return String.format("%-8s %-15s %-8s %-15s @ %-6s\n", "From", from, "To", to, at);
+    }
 }

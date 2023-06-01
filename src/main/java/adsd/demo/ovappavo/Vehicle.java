@@ -64,7 +64,6 @@ public class Vehicle {
             route.addStopOver(locationMap.get("Utrecht"), LocalTime.of(hour, 26), LocalTime.of(hour, 34));
             route.addEndPoint(locationMap.get("Amersfoort"), LocalTime.of(hour, 47));
             routeMap.put(route.getKey(), route);
-            route.write();
         }
     }
     //find track between 1 hour before and 1 hour after beginTime
@@ -110,13 +109,16 @@ public class Vehicle {
                 for (int i = listBegin; i <= listEnd; i++) {
                     trip.add(route.getStopOvers().get(i));
                 }
+
+                //automatic add found route to travels
                 Route route1 = new Route((ArrayList<StopOver>) trip);
-                //todo: add route1 to currentUser > find location for currentUser (if currentUser != "currentUser" aka null)
+                Travels.getTravelHistory().add(route1);
                 return trip;
             }
         }
         if(!trackFound) {
             System.out.println("Cannot find a route between: " + beginStop + " and " + endStop + " @ " + beginTime);
+            System.out.println("No route is added to your travel history" + "\n");
         } return null;
     }
     public void writeTrip(List<StopOver> trip) {
@@ -127,7 +129,9 @@ public class Vehicle {
         }
     }
     public String buildTripText(List<StopOver> trip) {
+
         if(trip != null) {
+            System.out.println("@Vehicle.buildTripText, trip !=nul");
             StringBuilder tripToString = new StringBuilder();
             tripToString.append("Route from: " + trip.get(0).getLocationName())
                     .append(" to: " + trip.get(trip.size() - 1).getLocationName())
@@ -141,6 +145,9 @@ public class Vehicle {
             System.out.println(outputTrip);
             return outputTrip;
         }
-        else { return "Cannot find your trip";}
+        else {
+            System.out.println("@Vehicle.buildTripText, trip ==nul");
+            return "Cannot build your trip";
+        }
     }
 }
