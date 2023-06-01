@@ -20,13 +20,16 @@
                         <Image url="@ovapplogo.png" />
                      </image>
                   </ImageView>
-                  <Label prefHeight="21.0" prefWidth="408.0" text="Stap 1 kies uw vervoers middel" textFill="#093770">
+                  <Label prefHeight="21.0" prefWidth="408.0" text="Stap 1 kies uw vervoersmiddel" textFill="#093770">
                      <VBox.margin>
                         <Insets left="40.0" top="60.0" />
                      </VBox.margin>
                      <font>
                         <Font name="Verdana Bold" size="17.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="Ga naar de lijst hier rechts en druk bij stap 1 op uw gewenste vervoersmiddel." />
+                     </tooltip>
                   </Label>
                   <Label layoutX="50.0" layoutY="310.0" prefHeight="21.0" prefWidth="408.0" text="Stap 2 kies uw beginstation" textFill="#093770">
                      <font>
@@ -35,6 +38,9 @@
                      <VBox.margin>
                         <Insets left="40.0" top="15.0" />
                      </VBox.margin>
+                     <tooltip>
+                        <Tooltip text="Ga naar de lijst hier rechts en druk bij stap 2 op uw gewenste vertrekpunt." />
+                     </tooltip>
                   </Label>
                   <Label layoutX="50.0" layoutY="310.0" prefHeight="21.0" prefWidth="408.0" text="Stap 3 kies uw eindstation" textFill="#093770">
                      <font>
@@ -43,6 +49,9 @@
                      <VBox.margin>
                         <Insets left="40.0" top="15.0" />
                      </VBox.margin>
+                     <tooltip>
+                        <Tooltip text="Ga naar de lijst hier rechts en druk bij stap 3 op uw gewenste eind bestemming." />
+                     </tooltip>
                   </Label>
                   <Label layoutX="50.0" layoutY="352.0" prefHeight="21.0" prefWidth="408.0" text="Stap 4 Kies uw tijdstip" textFill="#093770">
                      <font>
@@ -51,6 +60,9 @@
                      <VBox.margin>
                         <Insets left="40.0" top="15.0" />
                      </VBox.margin>
+                     <tooltip>
+                        <Tooltip text="Ga naar de lijst hier rechts en selecteer bij stap 4 uw vertrektijd." />
+                     </tooltip>
                   </Label>
                   <Label layoutX="50.0" layoutY="352.0" prefHeight="21.0" prefWidth="408.0" text="Stap 5 Zoek !" textFill="#093770">
                      <font>
@@ -59,6 +71,9 @@
                      <VBox.margin>
                         <Insets left="40.0" top="15.0" />
                      </VBox.margin>
+                     <tooltip>
+                        <Tooltip text="Ga naar de lijst hier rechts en druk op de blauwe balk." />
+                     </tooltip>
                   </Label>
                   <Label layoutX="50.0" layoutY="395.0" prefHeight="21.0" prefWidth="408.0" text="Stap 6 Zie uw reisinformatie" textFill="#093770">
                      <font>
@@ -67,6 +82,9 @@
                      <VBox.margin>
                         <Insets left="40.0" top="15.0" />
                      </VBox.margin>
+                     <tooltip>
+                        <Tooltip text="Hier rechts in de lijst bij stap 6 ziet de gegevens voor de beste reis voor u." />
+                     </tooltip>
                   </Label>
                   <Label layoutX="50.0" layoutY="534.0" prefHeight="21.0" prefWidth="408.0" text="Stap 7 bekijk uw reis op de kaart" textFill="#093770">
                      <font>
@@ -75,6 +93,9 @@
                      <VBox.margin>
                         <Insets left="40.0" top="15.0" />
                      </VBox.margin>
+                     <tooltip>
+                        <Tooltip text="Bij punt 7 kunt u de reis zien op een kaart." />
+                     </tooltip>
                   </Label>
                </children>
               </VBox>
@@ -97,6 +118,9 @@
                               <Insets left="20.0" />
                            </HBox.margin></Label>
                               <ComboBox fx:id="comboTransport" onAction="#onTransport" prefHeight="40.0" prefWidth="250.0" promptText="Kies uw vervoersmiddel">
+                                 <tooltip>
+                                    <Tooltip text="druk op de balk en selecteer een van de mogelijke vervoersmiddelen." />
+                                 </tooltip>
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin></ComboBox>
@@ -112,6 +136,9 @@
                               <Insets left="20.0" />
                            </HBox.margin></Label>
                               <ComboBox fx:id="comboA" onAction="#onComboA" prefHeight="40.0" prefWidth="250.0" promptText="Kies uw beginstation">
+                                 <tooltip>
+                                    <Tooltip text="Druk op de balk en selecteer een van de mogelijke begin stations." />
+                                 </tooltip>
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin></ComboBox>
@@ -131,6 +158,9 @@
                            </HBox.margin>
                         </Label>
                               <ComboBox fx:id="comboB" onAction="#onComboB" prefHeight="40.0" prefWidth="250.0" promptText="kies uw eindstation">
+                                 <tooltip>
+                                    <Tooltip text="Druk op de balk en selecteer een van de mogelijke eind stations." />
+                                 </tooltip>
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -151,6 +181,9 @@
                            </HBox.margin>
                         </Label>
                         <Spinner fx:id="spinnerTime" prefHeight="40.0" prefWidth="250.0">
+                           <tooltip>
+                              <Tooltip text="Selecteer de tijd waarop u wilt vertrekken. " />
+                           </tooltip>
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -193,7 +226,7 @@
                            </HBox.margin>
                         </Label>
                             <TextArea fx:id="textArea" editable="false" prefHeight="160.0" prefWidth="250.0" promptText="Zie hier uw reisinformatie" style="-fx-background-color: white;">
-                           <font>
+                               <font>
                               <Font size="18.0" />
                            </font>
                            <HBox.margin>
@@ -208,6 +241,9 @@
                   <HBox prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="300.0" text="Favoriete trajecten" textFill="#0d0d0d">
+                           <tooltip>
+                              <Tooltip text=" Als u op deze knop drukt kunt u uw favoriete trajecten bekijken." />
+                           </tooltip>
                            <HBox.margin>
                               <Insets left="50.0" top="23.0" />
                            </HBox.margin>
@@ -235,6 +271,9 @@
                         <Font name="Verdana Bold" size="28.0" />
                      </font></TextArea>
                   <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="300.0" text="Reis historie" textFill="#0d0d0d">
+                     <tooltip>
+                        <Tooltip text="Als u op deze knop drukt kunt u uw reis historie bekijken." />
+                     </tooltip>
                      <font>
                         <Font name="Verdana" size="19.0" />
                      </font>
