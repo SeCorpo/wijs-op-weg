@@ -1,80 +1,151 @@
 package adsd.demo.ovappavo;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.util.Duration;
+
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class OVappController
 {
+   // VEHICLE MAP
+   private Map<String, Vehicle> vehicleMap = new TreeMap<>();
+   Vehicle vehicle = new Vehicle("Vehicle");
+   Train train = new Train("Train");
+   Bus bus = new Bus("Bus");
+   {
+      vehicleMap.put(vehicle.getVehicleName(), vehicle);
+      vehicleMap.put(train.getVehicleName(), train);
+      vehicleMap.put(bus.getVehicleName(), bus);
+   }
+
+   // CURRENT VEHICLE
+   private Vehicle currentVehicle;
+   public Vehicle getCurrentVehicle() {
+         if(currentVehicle == null) {
+            Vehicle vehicle1 = new Vehicle("VehicleNull");
+            setCurrentVehicle(vehicle1);
+         } return currentVehicle;
+   }
+   public void setCurrentVehicle(Vehicle currentVehicle) {
+      this.currentVehicle = currentVehicle;
+      try {
+         vehicleMap.put(currentVehicle.getVehicleName(), currentVehicle);
+      } catch (Exception e) {
+         System.err.println("Cant put new currentVehicle 'VehicleNull' in vehicleMap");
+      }
+   }
+
+   // FXML OBJECTS
    @FXML private ComboBox<String> comboTransport;
    @FXML private ComboBox<String> comboA;
    @FXML private ComboBox<String> comboB;
-   @FXML private TextArea         textArea;
+   @FXML private Spinner spinnerTime;
+   @FXML private Button buttonPlanMyTrip;
+   @FXML private TextArea textArea;
+   @FXML private Label labelClock;
 
-   @FXML
-   public void onComboA()
-   {
-      System.out.println( "OVappController.onComboA" );
+   public void initialize() {
+
+      Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e ->
+              labelClock.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")))
+      ),
+              new KeyFrame(Duration.seconds(1))
+      );
+      clock.setCycleCount(Animation.INDEFINITE);
+      clock.play();
+
+      setComboTransport();
+      setComboA();
+      setComboB();
+      setSpinnerTime();
+
+      System.out.println("init TransportSelectorController done");
    }
 
-   @FXML
-   public void onComboB()
-   {
-      System.out.println( "OVappController.onComboB" );
+   // ACTION EVENTS
+   @FXML protected void onComboA() {
+      System.out.println("OVappController.onComboA :: to: " + comboA.getValue());
    }
-
-   @FXML
-   protected void onTransport()
-   {
-      System.out.print( "OVappController.onTransportChange" );
+   @FXML protected void onComboB() {
+      System.out.println("OVappController.onComboB :: to: " + comboB.getValue());
    }
+   @FXML protected void onTransport() {
+      setCurrentVehicle(vehicleMap.get(comboTransport.getValue()));
+      setComboA();
+      setComboB();
+      System.out.println("OVappController.onTransportChange :: to: " + comboTransport.getValue());
+   }
+   @FXML protected void onButtonPlanMyTrip() {
+      String beginStop = comboA.getValue();
+      String endStop = comboB.getValue();
+      LocalTime beginTime = LocalTime.parse(spinnerTime.getValue().toString());
+      //LocalTime beginTime = spinnerTime.getValue();
 
-   @FXML
-   protected void onPlanMyTrip()
-   {
-      System.out.println( "OVappController.onPlanMyTrip" );
-      System.out.format( "OVType: %s\n", comboTransport.getValue() );
-      System.out.format( "From:   %s\n", comboA.getValue() );
-      System.out.format( "To:     %s\n", comboB.getValue() );
+      getCurrentVehicle().findTrip(beginStop, endStop, beginTime);
 
-      String text = String.format( "%-8s %-15s\n", "OVType:", comboTransport.getValue() );
-      text += String.format( "%-8s %-15s\n", "From:", comboA.getValue() );
-      text += String.format( "%-8s %-15s\n", "To:", comboB.getValue() );
+      System.out.println("OVappController.onPlanMyTrip");
+      System.out.format("OVType: %s\n", comboTransport.getValue());
+      System.out.format("From:   %s\n", comboA.getValue());
+      System.out.format("To:     %s\n", comboB.getValue());
+
+      String text = String.format("%-8s %-15s\n", "OV-middel:", comboTransport.getValue());
+      text += String.format("%-8s %-15s\n", "Vanaf:", comboA.getValue());
+      text += String.format("%-8s %-15s\n", "Naar:", comboB.getValue());
 
       textArea.setText( text );
+      textArea.setText(getCurrentVehicle().buildTripText(getCurrentVehicle().findTrip(beginStop, endStop, beginTime)));
+
    }
 
-   // Important method to initialize this Controller object!!!
-   public void initialize()
-   {
-      System.out.println( "init TransportSelectorController ..." );
-
-      // Initialise the combo box comboTransport with transportation types ...
-      {
-         String[] ovtypes = { "Bus","Trein" };
-
-         ObservableList<String> list = FXCollections.observableArrayList( ovtypes );
-         comboTransport.setItems( list );
-
-
-
-      }
-
-      // Initialise the combo box comboA with stopover locations.
-      {
-         String[] locations = { "Amsterdam", "Amersfoort", "Arnhem", "Nijmegen", "Utrecht", "Rotterdam", "Vlissingen", "Maastricht", "Groningen" };
-
-         ObservableList<String> list = FXCollections.observableArrayList( locations );
-         comboA.setItems( list );
-
-
-         comboB.setItems( list );
-
-      }
-
-      System.out.println( "init TransportSelectorController done" );
+   // SETTERS
+   private void setComboTransport() {
+      ObservableList<String> vehicleList = FXCollections.observableArrayList();
+      vehicleList.addAll(vehicleMap.keySet());
+      comboTransport.setItems(vehicleList);
    }
+   private void setComboA() {
+      ObservableList<String> currentVehicleLocationList = FXCollections.observableArrayList();
+      currentVehicleLocationList.addAll(getCurrentVehicle().getLocationMap().keySet());
+      comboA.setItems(currentVehicleLocationList);
+   }
+   private void setComboB() {
+      ObservableList<String> currentVehicleLocationList = FXCollections.observableArrayList();
+      currentVehicleLocationList.addAll(getCurrentVehicle().getLocationMap().keySet());
+      comboB.setItems(currentVehicleLocationList);
+   }
+   private void setSpinnerTime() {
+      spinnerTime.setValueFactory(spinnerTimeController);
+      //spinnerTime.getEditor().textProperty().set(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
+   }
+
+   SpinnerValueFactory<LocalTime> spinnerTimeController = new SpinnerValueFactory<>() {
+      {
+         setValue(timeNow());
+      }
+      private LocalTime timeNow() {
+         return LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
+      }
+      public void decrement(int minutes) {
+         LocalTime time = getValue();
+         setValue(time == null ? timeNow() : time.minusMinutes(minutes * 5));
+      }
+      public void increment(int minutes) {
+         LocalTime time = getValue();
+         setValue(time == null ? timeNow() : time.plusMinutes(minutes * 5));
+      }
+   };
+
+
 
 }
