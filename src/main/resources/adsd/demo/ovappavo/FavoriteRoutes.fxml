@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.demo.ovappavo.FavoriteRoutesController">
+   <children>
+      <HBox prefHeight="700.0" prefWidth="1200.0">
+         <children>
+            <VBox prefHeight="700.0" prefWidth="410.0" style="-fx-background-color: #ffde59;">
+               <children>
+                  <ImageView fitHeight="229.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets left="88.0" top="50.0" />
+                     </VBox.margin>
+                     <image>
+                        <Image url="@ovapplogo.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="21.0" prefWidth="408.0" text="Stap 1 Maak hier een keuze uit" textFill="#093770">
+                     <VBox.margin>
+                        <Insets left="40.0" top="60.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Verdana Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="50.0" layoutY="350.0" prefHeight="21.0" prefWidth="408.0" text="uw favoriete trajecten" textFill="#093770">
+                     <font>
+                        <Font name="Verdana Bold" size="17.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="106.0" top="2.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label layoutX="50.0" layoutY="350.0" prefHeight="21.0" prefWidth="408.0" text="Stap 2 Bekijk de bijbehorende " textFill="#093770">
+                     <font>
+                        <Font name="Verdana Bold" size="17.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="40.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label layoutX="116.0" layoutY="374.0" prefHeight="21.0" prefWidth="408.0" text="informatie van het traject" textFill="#093770">
+                     <font>
+                        <Font name="Verdana Bold" size="17.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="106.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="700.0" prefWidth="792.0" style="-fx-background-color: ebebeb;">
+               <children>
+                  <Label text="Favoriete trajecten" textFill="#093770">
+                     <font>
+                        <Font name="Verdana Bold" size="27.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="40.0" top="50.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox prefHeight="250.0" prefWidth="500.0">
+                     <children>
+                        <Label text="1" textFill="#093770">
+                           <font>
+                              <Font name="Verdana Bold" size="28.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="40.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ListView prefHeight="100.0" prefWidth="681.0">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </ListView>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label text="2" textFill="#093770">
+                           <font>
+                              <Font name="Verdana Bold" size="28.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="40.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text="Traject informatie" textFill="#093770">
+                           <font>
+                              <Font name="Verdana Bold" size="22.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="15.0" top="6.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefWidth="325.0">
+                           <children>
+                              <Label text="Beginstation:" textFill="#093770">
+                                 <font>
+                                    <Font name="Verdana" size="20.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="75.0" top="15.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="85.0" layoutY="25.0" text="Eindstation:" textFill="#093770">
+                                 <font>
+                                    <Font name="Verdana" size="20.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="75.0" top="12.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="85.0" layoutY="56.0" text="Aantal tussenstops:" textFill="#093770">
+                                 <font>
+                                    <Font name="Verdana" size="20.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="75.0" top="12.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="85.0" layoutY="86.0" prefWidth="250.0" text="Tussenstopstation(s):" textFill="#093770">
+                                 <font>
+                                    <Font name="Verdana" size="20.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="75.0" top="12.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="85.0" layoutY="116.0" text="Reisduur:" textFill="#093770">
+                                 <font>
+                                    <Font name="Verdana" size="20.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="75.0" top="12.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="10.0" layoutY="10.0" prefHeight="193.0" prefWidth="424.0">
+                           <children>
+                              <TextField>
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </TextField>
+                              <TextField layoutX="10.0" layoutY="172.0">
+                                 <VBox.margin>
+                                    <Insets top="7.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </TextField>
+                              <TextField layoutX="10.0" layoutY="198.0">
+                                 <VBox.margin>
+                                    <Insets top="7.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </TextField>
+                              <TextField layoutX="10.0" layoutY="172.0">
+                                 <VBox.margin>
+                                    <Insets top="7.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </TextField>
+                              <TextField layoutX="10.0" layoutY="172.0">
+                                 <VBox.margin>
+                                    <Insets top="7.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="buttonSwitchOVApp" mnemonicParsing="false" onAction="#switchToOVapp" prefHeight="50.0" prefWidth="300.0" text="Plan uw reis" textFill="#0d0d0d">
+                           <HBox.margin>
+                              <Insets left="70.0" top="27.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Verdana" size="19.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="80.0" layoutY="33.0" mnemonicParsing="false" onAction="#switchToOVapp" prefHeight="50.0" prefWidth="300.0" text="Reis historie" textFill="#0d0d0d">
+                           <font>
+                              <Font name="Verdana" size="19.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="79.0" top="27.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
