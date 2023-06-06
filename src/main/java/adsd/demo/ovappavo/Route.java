@@ -2,7 +2,6 @@ package adsd.demo.ovappavo;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Route {
 
@@ -55,5 +54,11 @@ public class Route {
             }
             System.out.println();
         }
+    }
+    public String fromToATString(Route route) {
+        String from = route.getStopOvers().get(0).getLocationName();
+        String to = route.getStopOvers().get(route.getStopOvers().size()-1).getLocationName();
+        String at = route.getStopOvers().get(0).getTimeOfDeparture().toString();
+        return String.format("%-8s %-15s %-8s %-15s @ %-6s\n", "From", from, "To", to, at);
     }
 }
