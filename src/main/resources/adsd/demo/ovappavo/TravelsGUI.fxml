@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.demo.ovappavo.FavoriteRoutesController">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adsd.demo.ovappavo.TravelsGUIController">
    <children>
       <HBox prefHeight="700.0" prefWidth="1200.0">
          <children>
@@ -62,7 +62,7 @@
             </VBox>
             <VBox prefHeight="700.0" prefWidth="792.0" style="-fx-background-color: ebebeb;">
                <children>
-                  <Label text="Favoriete trajecten" textFill="#093770">
+                  <Label fx:id="labelTravelsFavoriteHistory" textFill="#093770">
                      <font>
                         <Font name="Verdana Bold" size="27.0" />
                      </font>
@@ -80,7 +80,7 @@
                               <Insets left="40.0" />
                            </HBox.margin>
                         </Label>
-                        <ListView prefHeight="100.0" prefWidth="681.0">
+                        <ListView fx:id="listViewTravels" prefHeight="100.0" prefWidth="681.0">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -158,7 +158,7 @@
                         </VBox>
                         <VBox layoutX="10.0" layoutY="10.0" prefHeight="193.0" prefWidth="424.0">
                            <children>
-                              <TextField>
+                              <TextField fx:id="textFieldTravelsBeginStation">
                                  <VBox.margin>
                                     <Insets top="15.0" />
                                  </VBox.margin>
@@ -166,7 +166,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </TextField>
-                              <TextField layoutX="10.0" layoutY="172.0">
+                              <TextField fx:id="textFieldTravelsEndStation" layoutX="10.0" layoutY="172.0">
                                  <VBox.margin>
                                     <Insets top="7.0" />
                                  </VBox.margin>
@@ -174,7 +174,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </TextField>
-                              <TextField layoutX="10.0" layoutY="198.0">
+                              <TextField fx:id="textFieldTravelsStopsCount" layoutX="10.0" layoutY="198.0">
                                  <VBox.margin>
                                     <Insets top="7.0" />
                                  </VBox.margin>
@@ -182,7 +182,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </TextField>
-                              <TextField layoutX="10.0" layoutY="172.0">
+                              <TextField fx:id="textFieldTravelsMiddleStops" layoutX="10.0" layoutY="172.0">
                                  <VBox.margin>
                                     <Insets top="7.0" />
                                  </VBox.margin>
@@ -190,7 +190,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </TextField>
-                              <TextField layoutX="10.0" layoutY="172.0">
+                              <TextField fx:id="textFieldTravelsTravelTime" layoutX="10.0" layoutY="172.0">
                                  <VBox.margin>
                                     <Insets top="7.0" />
                                  </VBox.margin>
@@ -204,7 +204,7 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="buttonSwitchOVApp" mnemonicParsing="false" onAction="#switchToOVapp" prefHeight="50.0" prefWidth="300.0" text="Plan uw reis" textFill="#0d0d0d">
+                        <Button fx:id="buttonTravelsPlanYourJourney" mnemonicParsing="false" onAction="#onButtonTravelsPlanYourJourney" prefHeight="50.0" prefWidth="300.0" text="Plan uw reis" textFill="#0d0d0d">
                            <HBox.margin>
                               <Insets left="70.0" top="27.0" />
                            </HBox.margin>
@@ -212,7 +212,7 @@
                               <Font name="Verdana" size="19.0" />
                            </font>
                         </Button>
-                        <Button layoutX="80.0" layoutY="33.0" mnemonicParsing="false" onAction="#switchToOVapp" prefHeight="50.0" prefWidth="300.0" text="Reis historie" textFill="#0d0d0d">
+                        <Button fx:id="buttonTravelsFavoriteHistory" layoutX="80.0" layoutY="33.0" mnemonicParsing="false" onAction="#onButtonFavoriteTravelHistory" prefHeight="50.0" prefWidth="300.0" textFill="#0d0d0d">
                            <font>
                               <Font name="Verdana" size="19.0" />
                            </font>

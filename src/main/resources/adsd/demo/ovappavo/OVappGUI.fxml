@@ -82,9 +82,6 @@
                      <VBox.margin>
                         <Insets left="40.0" top="15.0" />
                      </VBox.margin>
-                     <tooltip>
-                        <Tooltip text="Hier rechts in de lijst bij stap 6 ziet de gegevens voor de beste reis voor u." />
-                     </tooltip>
                   </Label>
                   <Label layoutX="50.0" layoutY="534.0" prefHeight="21.0" prefWidth="408.0" text="Stap 7 bekijk uw reis op de kaart" textFill="#093770">
                      <font>
@@ -101,7 +98,7 @@
               </VBox>
             <VBox prefHeight="444.0" prefWidth="350.0" style="-fx-background-color: ebebeb;">
                <children>
-                  <Label text="Plan uw reis !" textFill="#093770">
+                  <Label text="Plan uw reis" textFill="#093770">
                      <font>
                         <Font name="Verdana Bold" size="27.0" />
                      </font>
@@ -117,7 +114,7 @@
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin></Label>
-                              <ComboBox fx:id="comboTransport" onAction="#onTransport" prefHeight="40.0" prefWidth="250.0" promptText="Kies uw vervoersmiddel">
+                              <ComboBox fx:id="comboTransport" onAction="#onTransport" prefHeight="40.0" prefWidth="230.0" promptText="Kies uw vervoersmiddel">
                                  <tooltip>
                                     <Tooltip text="druk op de balk en selecteer een van de mogelijke vervoersmiddelen." />
                                  </tooltip>
@@ -135,7 +132,7 @@
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin></Label>
-                              <ComboBox fx:id="comboA" onAction="#onComboA" prefHeight="40.0" prefWidth="250.0" promptText="Kies uw beginstation">
+                              <ComboBox fx:id="comboA" onAction="#onComboA" prefHeight="40.0" prefWidth="230.0" promptText="Kies uw beginstation">
                                  <tooltip>
                                     <Tooltip text="Druk op de balk en selecteer een van de mogelijke begin stations." />
                                  </tooltip>
@@ -157,7 +154,7 @@
                               <Insets left="20.0" />
                            </HBox.margin>
                         </Label>
-                              <ComboBox fx:id="comboB" onAction="#onComboB" prefHeight="40.0" prefWidth="250.0" promptText="kies uw eindstation">
+                              <ComboBox fx:id="comboB" onAction="#onComboB" prefHeight="40.0" prefWidth="230.0" promptText="kies uw eindstation">
                                  <tooltip>
                                     <Tooltip text="Druk op de balk en selecteer een van de mogelijke eind stations." />
                                  </tooltip>
@@ -193,9 +190,9 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox prefHeight="40.0" prefWidth="230.0">
+                  <HBox layoutX="10.0" layoutY="235.0" prefHeight="40.0" prefWidth="200.0">
                      <children>
-                        <Label text="5" textFill="#093770">
+                        <Label text="4" textFill="#093770">
                            <font>
                               <Font name="Verdana Bold" size="28.0" />
                            </font>
@@ -208,16 +205,16 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                            <font>
-                              <Font name="Verdana" size="20.0" />
+                              <Font size="17.0" />
                            </font></Button>
                      </children>
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox prefHeight="250.0" prefWidth="300.0">
+                  <HBox prefHeight="146.0" prefWidth="300.0">
                      <children>
-                        <Label text="6" textFill="#093770">
+                        <Label text="5" textFill="#093770">
                            <font>
                               <Font name="Verdana Bold" size="28.0" />
                            </font>
@@ -238,30 +235,24 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="buttonFavoriteTravels" mnemonicParsing="false" onAction="#onButtonFavoriteTravels" prefHeight="50.0" prefWidth="300.0" text="Favoriete trajecten" textFill="#0d0d0d">
-                           <tooltip>
-                              <Tooltip text=" Als u op deze knop drukt kunt u uw favoriete trajecten bekijken." />
-                           </tooltip>
-                           <HBox.margin>
-                              <Insets left="50.0" top="23.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Verdana" size="19.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
+                  <Button fx:id="buttonTravelHistory" mnemonicParsing="false" onAction="#onButtonTravelHistory" prefHeight="50.0" prefWidth="300.0" text="Reis historie" textFill="#0d0d0d">
+                     <tooltip>
+                        <Tooltip text="Als u op deze knop drukt kunt u uw reis historie bekijken." />
+                     </tooltip>
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="60.0" top="30.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
-               <HBox.margin>
-                  <Insets left="20.0" />
-               </HBox.margin>
             </VBox>
-            <VBox prefHeight="444.0" prefWidth="450.0" style="-fx-background-color: ebebeb;">
+            <VBox prefHeight="700.0" prefWidth="450.0" style="-fx-background-color: ebebeb;">
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="105.0">
                      <Label fx:id="labelClock" text="00:00:00" textFill="#093770">
@@ -274,21 +265,18 @@
                   </HBox>
                   <TextArea fx:id="textAreaLarge" editable="false" prefHeight="462.0" prefWidth="200.0" style="-fx-background-color: white;" text="7">
                      <VBox.margin>
-                        <Insets left="10.0" right="44.0" />
+                        <Insets left="10.0" right="20.0" top="105.0" />
                      </VBox.margin>
                      <font>
                         <Font name="Verdana Bold" size="28.0" />
                      </font></TextArea>
-                  <Button fx:id="buttonTravelHistory" mnemonicParsing="false" onAction="#onButtonTravelHistory" prefHeight="50.0" prefWidth="300.0" text="Reis historie" textFill="#0d0d0d">
+                  <Button fx:id="buttonFavoriteTravels" mnemonicParsing="false" onAction="#onButtonFavoriteTravels" prefHeight="50.0" prefWidth="300.0" text="Favoriete trajecten" textFill="#0d0d0d">
                      <tooltip>
-                        <Tooltip text="Als u op deze knop drukt kunt u uw reis historie bekijken." />
+                        <Tooltip text=" Als u op deze knop drukt kunt u uw favoriete trajecten bekijken." />
                      </tooltip>
                      <font>
-                        <Font name="Verdana" size="19.0" />
+                        <Font size="17.0" />
                      </font>
-                     <VBox.margin>
-                        <Insets left="111.0" right="10.0" top="26.0" />
-                     </VBox.margin>
                   </Button>
                </children>
                <HBox.margin>

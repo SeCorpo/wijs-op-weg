@@ -5,10 +5,17 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -21,12 +28,13 @@ import java.util.TreeMap;
 public class OVappController
 {
     // VEHICLE MAP
-    private Map<String, Vehicle> vehicleMap = new TreeMap<>();
-    Vehicle vehicle = new Vehicle("Vehicle");
+    private static Map<String, Vehicle> vehicleMap = new TreeMap<>();
+    public static Map<String, Vehicle> getVehicleMap() {return vehicleMap;}
+    //Vehicle vehicle = new Vehicle("Vehicle");
     Train train = new Train("Train");
     Bus bus = new Bus("Bus");
     {
-        vehicleMap.put(vehicle.getVehicleName(), vehicle);
+        //vehicleMap.put(vehicle.getVehicleName(), vehicle);
         vehicleMap.put(train.getVehicleName(), train);
         vehicleMap.put(bus.getVehicleName(), bus);
     }
@@ -73,7 +81,7 @@ public class OVappController
         initComboB();
         initSpinnerTime();
 
-        System.out.println("initialize done");
+        System.out.println("OVappController - initialize done");
     }
 
     // ACTION EVENTS
@@ -107,22 +115,12 @@ public class OVappController
         System.out.println("OVappController.onPlanMyTrip <<<<<<<<<<");
     }
     @FXML protected void onButtonFavoriteTravels() {
-        List<String> favoriteTravelsString = new ArrayList<>();
-        for(Route route : Travels.getTravelHistory()) {
-            favoriteTravelsString.add(route.fromToATString(route));
-        }
-
-        // todo: print to textArea / textList or Label?? print Arraylist to textArea
+        favoriteTrueHistoryFalse = true;
+        OVapp.getInstance().loadFXML("TravelsGUI.fxml");
     }
     @FXML protected void onButtonTravelHistory() {
-        List<String> travelHistoryRoutesString = new ArrayList<>();
-        for(Route route : Travels.getTravelHistory()) {
-            travelHistoryRoutesString.add(route.fromToATString(route));
-        }
-        for(String rp : travelHistoryRoutesString) {
-            System.out.println(rp);
-        }
-        // todo: print to textArea / textList or Label?? print Arraylist to textArea
+        favoriteTrueHistoryFalse = false;
+        OVapp.getInstance().loadFXML("TravelsGUI.fxml");
     }
 
     // INITIALIZE FUNCTIONS
@@ -130,7 +128,7 @@ public class OVappController
         ObservableList<String> vehicleList = FXCollections.observableArrayList();
         vehicleList.addAll(vehicleMap.keySet());
         comboTransport.setItems(vehicleList);
-        comboTransport.getSelectionModel().select(2);
+        comboTransport.getSelectionModel().select(1);
     }
     private void initComboA() {
         ObservableList<String> currentVehicleLocationList = FXCollections.observableArrayList();
@@ -173,6 +171,8 @@ public class OVappController
         clock.play();
     }
     // HELPER FUNCTIONS
+    public static boolean favoriteTrueHistoryFalse = true;
+
     private void latestTraveledRoute() {
         try {
             String latestTraveledRouteString =

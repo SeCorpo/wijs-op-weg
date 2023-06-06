@@ -97,8 +97,8 @@ public class Vehicle {
                     endLocation = stopOver;
                     listEnd = route.getStopOvers().indexOf(stopOver);
                     endLocationFound = true;
-                } else if(stopOver.getTimeOfDeparture().isAfter(beginTime.minusHours(1)) &&
-                        stopOver.getTimeOfDeparture().isBefore(beginTime.plusHours(1))) {
+                } if(stopOver.getTimeOfDeparture().isAfter(beginTime.minusHours(2)) &&
+                        stopOver.getTimeOfDeparture().isBefore(beginTime.plusHours(2))) {
                     beginTimeFound = true;
                 }
             }
