@@ -45,7 +45,6 @@ public class Train extends Vehicle {
             route.addStopOver(locationMap.get("Utrecht"), LocalTime.of(hour, 13), LocalTime.of(hour, 21));
             route.addEndPoint(locationMap.get("Amsterdam"), LocalTime.of(hour, 47));
             routeMap.put(route.getKey(), route);
-            route.write();
         }
         //Amsterdam - Utrecht - Amersfoort
         for (int hour = 6; hour <= 22; hour += 1) {
@@ -54,7 +53,6 @@ public class Train extends Vehicle {
             route.addStopOver(locationMap.get("Utrecht"), LocalTime.of(hour, 26), LocalTime.of(hour, 34));
             route.addEndPoint(locationMap.get("Amersfoort"), LocalTime.of(hour, 47));
             routeMap.put(route.getKey(), route);
-            route.write();
         }
         //Groningen - Nijmegen - Maastricht
         for (int hour = 6; hour <= 20; hour += 2) {
@@ -71,7 +69,6 @@ public class Train extends Vehicle {
             route.addStopOver(locationMap.get("Nijmegen"), LocalTime.of(hour + 1, 43), LocalTime.of(hour + 1, 53));
             route.addEndPoint(locationMap.get("Groningen"), LocalTime.of(hour + 3, 59));
             routeMap.put(route.getKey(), route);
-            route.write();
         }
         // Groningen - Amersfoort - Utrecht
         for (int hour = 8; hour <= 21; hour += 1) {
@@ -80,7 +77,6 @@ public class Train extends Vehicle {
             route.addStopOver(locationMap.get("Amersfoort"), LocalTime.of(hour + 1, 37), LocalTime.of(hour, 40));
             route.addEndPoint(locationMap.get("Utrecht"), LocalTime.of(hour + 1, 53));
             routeMap.put(route.getKey(), route);
-            route.write();
         }
         // Utrecht - Amersfoort - Groningen
         for (int hour = 8; hour <= 21; hour += 1) {
@@ -89,7 +85,6 @@ public class Train extends Vehicle {
             route.addStopOver(locationMap.get("Amersfoort"), LocalTime.of(hour, 13), LocalTime.of(hour, 15));
             route.addEndPoint(locationMap.get("Groningen"), LocalTime.of(hour + 1, 53));
             routeMap.put(route.getKey(), route);
-            route.write();
         }
         // Nijmegen - Utrecht - Amsterdam - Haarlem
         for (int hour = 8; hour <= 21; hour += 1) {
@@ -99,7 +94,6 @@ public class Train extends Vehicle {
             route.addStopOver(locationMap.get("Amsterdam"), LocalTime.of(hour + 1, 35), LocalTime.of(hour + 1, 45));
             route.addEndPoint(locationMap.get("Haarlem"), LocalTime.of(hour + 2, 5));
             routeMap.put(route.getKey(), route);
-            route.write();
         }
         // Haarlem - Amsterdam - Utrecht - Nijmegen
         for (int hour = 8; hour <= 21; hour += 1) {
@@ -109,7 +103,6 @@ public class Train extends Vehicle {
             route.addStopOver(locationMap.get("Utrecht"), LocalTime.of(hour, 51), LocalTime.of(hour, 53));
             route.addEndPoint(locationMap.get("Nijmegen"), LocalTime.of(hour + 1, 47));
             routeMap.put(route.getKey(), route);
-            route.write();
         }
     }
 }

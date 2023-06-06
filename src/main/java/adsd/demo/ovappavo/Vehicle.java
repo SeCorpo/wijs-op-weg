@@ -33,21 +33,21 @@ public class Vehicle {
     }
 
     //DATA_/////////////////////////////////////////////////////////
-    {
-        addLocation("Abcoude");
-        addLocation("Amersfoort");
-        addLocation("Amsterdam");
-        addLocation("Arnhem");
-        addLocation("Emmen");
-        addLocation("Groningen");
-        addLocation("Haarlem");
-        addLocation("Maastricht");
-        addLocation("Nijmegen");
-        addLocation("Rotterdam");
-        addLocation("Utrecht");
-        addLocation("Vlissingen");
-        addLocation("Xanten");
-    }
+//    {
+//        addLocation("Abcoude");
+//        addLocation("Amersfoort");
+//        addLocation("Amsterdam");
+//        addLocation("Arnhem");
+//        addLocation("Emmen");
+//        addLocation("Groningen");
+//        addLocation("Haarlem");
+//        addLocation("Maastricht");
+//        addLocation("Nijmegen");
+//        addLocation("Rotterdam");
+//        addLocation("Utrecht");
+//        addLocation("Vlissingen");
+//        addLocation("Xanten");
+//    }
     //find track between 2 hours before and 2 hours after beginTime
     public List<StopOver> findTrip(String beginStop, String endStop, LocalTime beginTime) {
         System.out.println("@Vehicle.findTrip :: find all tracks from: " + beginStop + " to: " + endStop + " @ " + beginTime.toString() + " using: " + getVehicleName());
