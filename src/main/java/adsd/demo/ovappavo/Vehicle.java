@@ -48,26 +48,7 @@ public class Vehicle {
         addLocation("Vlissingen");
         addLocation("Xanten");
     }
-    {
-        //Amersfoort - Utrecht - Amsterdam
-        for (int hour = 6; hour <= 22; hour += 1) {
-            LocalTime timeOfDeparture = LocalTime.of(hour, 0);
-            Route route = new Route(locationMap.get("Amersfoort"), timeOfDeparture);
-            route.addStopOver(locationMap.get("Utrecht"), LocalTime.of(hour, 13), LocalTime.of(hour, 21));
-            route.addEndPoint(locationMap.get("Amsterdam"), LocalTime.of(hour, 47));
-            routeMap.put(route.getKey(), route);
-        }
-        //Amsterdam - Utrecht - Amersfoort
-        for (int hour = 6; hour <= 22; hour += 1) {
-            LocalTime timeOfDeparture = LocalTime.of(hour, 0);
-            Route route = new Route(locationMap.get("Amsterdam"), timeOfDeparture);
-            route.addStopOver(locationMap.get("Utrecht"), LocalTime.of(hour, 26), LocalTime.of(hour, 34));
-            route.addEndPoint(locationMap.get("Amersfoort"), LocalTime.of(hour, 47));
-            routeMap.put(route.getKey(), route);
-            route.write();
-        }
-    }
-    //find track between 1 hour before and 1 hour after beginTime
+    //find track between 2 hours before and 2 hours after beginTime
     public List<StopOver> findTrip(String beginStop, String endStop, LocalTime beginTime) {
         System.out.println("@Vehicle.findTrip :: find all tracks from: " + beginStop + " to: " + endStop + " @ " + beginTime.toString() + " using: " + getVehicleName());
 
@@ -98,8 +79,8 @@ public class Vehicle {
                     endLocation = stopOver;
                     listEnd = route.getStopOvers().indexOf(stopOver);
                     endLocationFound = true;
-                } else if(stopOver.getTimeOfDeparture().isAfter(beginTime.minusHours(1)) &&
-                        stopOver.getTimeOfDeparture().isBefore(beginTime.plusHours(1))) {
+                }
+                if(stopOver.getTimeOfDeparture().isAfter(beginTime.minusHours(2)) && stopOver.getTimeOfDeparture().isBefore(beginTime.plusHours(2))) {
                     beginTimeFound = true;
                 }
             }

@@ -9,18 +9,18 @@ import java.io.IOException;
 
 public class OVapp extends Application
 {
-   @Override
-   public void start( Stage stage ) throws IOException
-   {
-      FXMLLoader fxmlLoader = new FXMLLoader( OVapp.class.getResource( "OVappGUI.fxml" ) );
-      Scene      scene      = new Scene( fxmlLoader.load(), 1200, 700 );
-      stage.setTitle( "Mobiliteitsfabriek" );
-      stage.setScene( scene );
-      stage.show();
-   }
+  @Override
+  public void start( Stage stage ) throws IOException
+  {
+    FXMLLoader fxmlLoader = new FXMLLoader( OVapp.class.getResource( "OVappGUI.fxml" ) );
+    Scene      scene      = new Scene( fxmlLoader.load(), 1200, 700 );
+    stage.setTitle( "Mobiliteitsfabriek" );
+    stage.setScene( scene );
+    stage.show();
+  }
 
-   public static void main( String[] args )
-   {
-      Application.launch();
-   }
+  public static void main( String[] args )
+  {
+    Application.launch();
+  }
 }

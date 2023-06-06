@@ -50,6 +50,10 @@ public class Route {
         } else {
             System.out.format("%-6s [%-13s] %-4s %-10s %-2s %-2s %-5s %-4s %-8s %-2s %-2s %-5s\n", "Route:", getKey(), " ", "Departure: ", first.getLocationName(), "at ",
                     first.getTimeOfDeparture(), " ", "Arrival: ", last.getLocationName(), "at ", last.getTimeOfArrival());
+            for (StopOver stopover : stopOvers) {
+                System.out.print(stopover.getLocationName() + " ");
+            }
+            System.out.println();
         }
     }
 }
