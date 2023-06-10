@@ -3,7 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -80,11 +81,13 @@
                               <Insets left="40.0" />
                            </HBox.margin>
                         </Label>
-                        <ListView fx:id="listViewTravels" prefHeight="100.0" prefWidth="681.0">
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </ListView>
+                        <TableView fx:id="tableViewTravels" onMouseClicked="#onTableViewTravels" prefHeight="250.0" prefWidth="733.0">
+                          <columns>
+                            <TableColumn fx:id="tableViewTravelsFrom" prefWidth="267.0" text="From" />
+                            <TableColumn fx:id="tableViewTravelsTo" prefWidth="298.0" text="To" />
+                              <TableColumn fx:id="tableViewTravelsBeginTime" prefWidth="167.0" text="Begin Time" />
+                          </columns>
+                        </TableView>
                      </children>
                   </HBox>
                   <HBox>

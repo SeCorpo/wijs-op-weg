@@ -39,6 +39,24 @@ public class Route {
 
         return key;
     }
+    public String getFirstStopOver() {
+        if(stopOvers != null && !stopOvers.isEmpty()) {
+            return stopOvers.get(0).getLocationName();
+        }
+        return null;
+    }
+    public String getLastStopOver() {
+        if(stopOvers != null && !stopOvers.isEmpty()) {
+            return stopOvers.get(stopOvers.size()-1).getLocationName();
+        }
+        return null;
+    }
+    public LocalTime getTimeOfDepartureFrom() {
+        if(stopOvers != null && !stopOvers.isEmpty()) {
+            return stopOvers.get(0).getTimeOfDeparture();
+        }
+        return null;
+    }
 
     public void write() {
         StopOver first = stopOvers.get(0);

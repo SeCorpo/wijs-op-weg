@@ -16,6 +16,7 @@ public class Travels {
         return travelHistory;
     }
 
+
     //FAVORITE ROUTES
     static
     {
@@ -34,5 +35,16 @@ public class Travels {
         route.addStopOver(OVappController.getVehicleMap().get("Train").getLocationMap().get("Utrecht"), LocalTime.of(12, 13), LocalTime.of(12, 21));
         route.addEndPoint(OVappController.getVehicleMap().get("Train").getLocationMap().get("Amsterdam"), LocalTime.of(12, 47));
         travelHistory.add(route);
+
+        //Nijmegen - Maastricht
+        Route route1 = new Route(OVappController.getVehicleMap().get("Bus").getLocationMap().get("Nijmegen"), LocalTime.of(16,0));
+        route1.addEndPoint(OVappController.getVehicleMap().get("Bus").getLocationMap().get("Maastricht"), LocalTime.of(18, 47));
+        travelHistory.add(route1);
+
+        // Amsterdam - Utrecht - Nijmegen
+        Route route2 = new Route(OVappController.getVehicleMap().get("Train").getLocationMap().get("Amsterdam"), LocalTime.of(8,24));
+        route2.addStopOver(OVappController.getVehicleMap().get("Train").getLocationMap().get("Utrecht"), LocalTime.of(8, 51), LocalTime.of(8, 53));
+        route2.addEndPoint(OVappController.getVehicleMap().get("Train").getLocationMap().get("Nijmegen"), LocalTime.of(9, 47));
+        travelHistory.add(route2);
     }
 }
