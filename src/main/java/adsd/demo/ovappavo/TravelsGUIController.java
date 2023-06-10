@@ -63,7 +63,7 @@ public class TravelsGUIController {
     }
 
     private void setupTravelsInfo() {
-
+        //HIER KOMT DE SPECIFIEKE REISINFO LOADER VAN ROUTES DIE IN DE TABLEVIEW ZIJN GESELECTEERD
     }
 
     // HELPER FUNCTIONS
