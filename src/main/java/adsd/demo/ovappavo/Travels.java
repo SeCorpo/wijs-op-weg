@@ -16,6 +16,10 @@ public class Travels {
         return travelHistory;
     }
 
+    public static void addRouteToFavorite(Route route) {
+        favoriteRoutes.add(route);
+        System.out.println("Route added to favoriteRoutes");
+    }
 
     //FAVORITE ROUTES
     static

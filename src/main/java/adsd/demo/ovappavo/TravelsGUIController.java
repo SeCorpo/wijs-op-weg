@@ -1,11 +1,10 @@
 package adsd.demo.ovappavo;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -44,7 +43,7 @@ public class TravelsGUIController {
         initialize();
     }
     public void onTableViewTravels() {
-
+        setupTravelsInfo();
     }
 
     // INITIALIZE FUNCTIONS
@@ -63,7 +62,17 @@ public class TravelsGUIController {
     }
 
     private void setupTravelsInfo() {
-        //HIER KOMT DE SPECIFIEKE REISINFO LOADER VAN ROUTES DIE IN DE TABLEVIEW ZIJN GESELECTEERD
+        textFieldTravelsBeginStation.setText(tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().get(0).getLocationName());
+        textFieldTravelsEndStation.setText(tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().get(tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().size() - 1).getLocationName());
+        textFieldTravelsStopsCount.setText(String.valueOf(tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().size()));
+
+        StringBuilder middleStops = new StringBuilder();
+        for(int i = 1; i < tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().size()-1; i++) {
+            middleStops.append(tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().get(i).getLocationName() + " ");
+        }
+        textFieldTravelsMiddleStops.setText(middleStops.toString());
+
+        textFieldTravelsTravelTime.setText(travelTime());
     }
 
     // HELPER FUNCTIONS
@@ -72,17 +81,20 @@ public class TravelsGUIController {
         tableViewTravels.getItems().clear();
         arrayList.forEach((route) -> tableViewTravels.getItems().add(route));
 
-        tableViewTravelsFrom.setCellValueFactory(new PropertyValueFactory<Route, String>("firstStopOver"));
-        tableViewTravelsTo.setCellValueFactory(new PropertyValueFactory<Route, String>("lastStopOver"));
-        tableViewTravelsBeginTime.setCellValueFactory(new PropertyValueFactory<Route, LocalTime>("timeOfDepartureFrom"));
+        tableViewTravelsFrom.setCellValueFactory(new PropertyValueFactory<>("firstStopOver"));
+        tableViewTravelsTo.setCellValueFactory(new PropertyValueFactory<>("lastStopOver"));
+        tableViewTravelsBeginTime.setCellValueFactory(new PropertyValueFactory<>("timeOfDepartureFrom"));
     }
-    private void loadListView(ArrayList<Route> arrayList, String add) {
-        ObservableList<String> travelsStringData = FXCollections.observableArrayList();
 
-        travelsStringData.add(add);
-        for(Route route : arrayList) {
-            travelsStringData.add(route.fromToATString(route));
-        }
-        //listViewTravels.setItems(travelsStringData);
+    private String travelTime() {
+        Duration travelDuration = Duration.between(
+                tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().get(0).getTimeOfDeparture(),
+                tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().get(tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().size() - 1).getTimeOfArrival()
+        );
+
+        long hours = travelDuration.toHours();
+        long minutes = travelDuration.toMinutesPart();
+
+        return hours + " hours " + minutes + " minutes";
     }
 }

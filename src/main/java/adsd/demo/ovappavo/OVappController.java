@@ -24,7 +24,7 @@ import java.util.TreeMap;
 public class OVappController
 {
     // VEHICLE MAP
-    private static Map<String, Vehicle> vehicleMap = new TreeMap<>();
+    private final static Map<String, Vehicle> vehicleMap = new TreeMap<>();
     public static Map<String, Vehicle> getVehicleMap() {return vehicleMap;}
     //Vehicle vehicle = new Vehicle("Vehicle");
     Train train = new Train("Train");
@@ -67,6 +67,7 @@ public class OVappController
     @FXML private Label labelClock;
     @FXML private Button buttonFavoriteTravels;
     @FXML private Button buttonTravelHistory;
+    @FXML private Button buttonFavorite;
 
     public static boolean favoriteTrueHistoryFalse = true;
 
@@ -101,10 +102,6 @@ public class OVappController
 
         textAreaSmall.setText(getCurrentVehicle().buildTripText(getCurrentVehicle().findTrip(beginStop, endStop, beginTime)));
 
-//        System.out.format("OVType: %s\n", comboTransport.getValue());
-//        System.out.format("From:   %s\n", comboA.getValue());
-//        System.out.format("To:     %s\n", comboB.getValue());
-
         latestTraveledRoute();
 
         System.out.println("OVappController.onPlanMyTrip <<<<<<<<<<");
@@ -116,6 +113,15 @@ public class OVappController
     @FXML protected void onButtonTravelHistory() {
         favoriteTrueHistoryFalse = false;
         OVapp.getInstance().loadFXML("TravelsGUI.fxml");
+    }
+
+    @FXML protected void onButtonFavorite() {
+        String beginStop = comboA.getValue();
+        String endStop = comboB.getValue();
+        LocalTime beginTime = LocalTime.parse(spinnerTime.getValue().toString());
+
+
+        Travels.addRouteToFavorite(getCurrentVehicle().findTrip(beginStop,endStop,beginTime));
     }
 
     // INITIALIZE FUNCTIONS

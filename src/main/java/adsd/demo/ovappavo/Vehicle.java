@@ -32,77 +32,64 @@ public class Vehicle {
         locationMap.put(locationToAdd.getLocationName(), locationToAdd);
     }
 
-    //DATA_/////////////////////////////////////////////////////////
-//    {
-//        addLocation("Abcoude");
-//        addLocation("Amersfoort");
-//        addLocation("Amsterdam");
-//        addLocation("Arnhem");
-//        addLocation("Emmen");
-//        addLocation("Groningen");
-//        addLocation("Haarlem");
-//        addLocation("Maastricht");
-//        addLocation("Nijmegen");
-//        addLocation("Rotterdam");
-//        addLocation("Utrecht");
-//        addLocation("Vlissingen");
-//        addLocation("Xanten");
-//    }
-    //find track between 2 hours before and 2 hours after beginTime
-    public List<StopOver> findTrip(String beginStop, String endStop, LocalTime beginTime) {
+
+    //Find track within one hour of your selected time
+    public Route findTrip(String beginStop, String endStop, LocalTime beginTime) {
         System.out.println("@Vehicle.findTrip :: find all tracks from: " + beginStop + " to: " + endStop + " @ " + beginTime.toString() + " using: " + getVehicleName());
-
-        boolean beginLocationFound;
-        boolean endLocationFound;
-        boolean beginTimeFound;
-        boolean trackFound = false;
-
-        StopOver beginLocation;
-        StopOver endLocation;
 
         int listBegin = 0;
         int listEnd = 0;
+        StopOver beginStopOver = null;
 
-        for(Route route : getRouteMap().values()) {
-            beginLocationFound = false;
-            endLocationFound = false;
-            beginTimeFound = false;
-            beginLocation = null;
-            endLocation = null;
+        for (Route route : getRouteMap().values()) {
+            boolean beginLocationFound = false;
+            boolean endLocationFound = false;
+            boolean beginTimeFound = false;
 
-            for(StopOver stopOver : route.getStopOvers()) {
-                if(stopOver.getLocationName().equals(beginStop)) {
-                    beginLocation = stopOver;
+            for (StopOver stopOver : route.getStopOvers()) {
+                if (stopOver.getLocationName().equals(beginStop)) {
+                    beginStopOver = stopOver;
                     listBegin = route.getStopOvers().indexOf(stopOver);
                     beginLocationFound = true;
-                } else if(stopOver.getLocationName().equals(endStop)) {
-                    endLocation = stopOver;
+                }
+
+                if (beginLocationFound && stopOver.getLocationName().equals(endStop)) {
                     listEnd = route.getStopOvers().indexOf(stopOver);
                     endLocationFound = true;
-                } if(stopOver.getTimeOfDeparture().isAfter(beginTime.minusHours(2)) &&
-                        stopOver.getTimeOfDeparture().isBefore(beginTime.plusHours(2))) {
-                    beginTimeFound = true;
-                }
-            }
-
-            if(beginLocationFound && endLocationFound && beginTimeFound && beginLocation.getTimeOfDeparture().isBefore(endLocation.getTimeOfArrival())) {
-                List<StopOver> trip = new ArrayList<>();
-
-                for (int i = listBegin; i <= listEnd; i++) {
-                    trip.add(route.getStopOvers().get(i));
                 }
 
-                //automatic add found route to travels
-                Route route1 = new Route((ArrayList<StopOver>) trip);
-                Travels.getTravelHistory().add(route1);
-                return trip;
+                if (endLocationFound) {
+                    LocalTime stopOverDepartureTime = beginStopOver.getTimeOfDeparture();
+                    if (stopOverDepartureTime.isAfter(beginTime) && stopOverDepartureTime.isBefore(beginTime.plusMinutes(30))) {
+                        beginTimeFound = true;
+                        System.out.println("Time is after timeOfDeparture & before +30 min");
+                    } else if (stopOverDepartureTime.isAfter(beginTime) && stopOverDepartureTime.isBefore(beginTime.plusHours(1))) {
+                        beginTimeFound = true;
+                        System.out.println("Time is after timeOfDeparture & before +60 min");
+                    }
+                }
+
+                if (beginLocationFound && endLocationFound && beginTimeFound) {
+                    ArrayList<StopOver> trip = new ArrayList<>();
+
+                    for (int i = listBegin; i <= listEnd; i++) {
+                        trip.add(route.getStopOvers().get(i));
+                    }
+
+                    // Automatically add the found route to travels
+                    Route route1 = new Route(trip);
+                    Travels.getTravelHistory().add(route1);
+                    return route1;
+                }
             }
         }
-        if(!trackFound) {
-            System.out.println("Cannot find a route between: " + beginStop + " and " + endStop + " @ " + beginTime);
-            System.out.println("No route is added to your travel history" + "\n");
-        } return null;
+
+        System.out.println("Cannot find a route between: " + beginStop + " and " + endStop + " @ " + beginTime);
+        System.out.println("No route is added to your travel history" + "\n");
+        return null;
     }
+
+
     public void writeTrip(List<StopOver> trip) {
         System.out.println("@Track.writeRoute :: Route from: " + trip.get(0).getLocationName() + " to: " +
                 trip.get(trip.size() - 1).getLocationName() + " @ " + trip.get(0).getTimeOfDeparture().toString());
@@ -110,16 +97,16 @@ public class Vehicle {
             System.out.println("Location: " + stopOver.getLocationName() + " @ " + stopOver.getTimeOfArrival());
         }
     }
-    public String buildTripText(List<StopOver> trip) {
+    public String buildTripText(Route route) {
 
-        if(trip != null) {
+        if(route != null) {
             System.out.println("@Vehicle.buildTripText, trip !=nul");
             StringBuilder tripToString = new StringBuilder();
-            tripToString.append("Route from: " + trip.get(0).getLocationName())
-                    .append(" to: " + trip.get(trip.size() - 1).getLocationName())
-                    .append(" at: " + trip.get(0).getTimeOfDeparture().toString() + "\n");
+            tripToString.append("Route from: " + route.getStopOvers().get(0).getLocationName())
+                    .append(" to: " + route.getStopOvers().get(route.getStopOvers().size() - 1).getLocationName())
+                    .append(" at: " + route.getStopOvers().get(0).getTimeOfDeparture().toString() + "\n");
 
-            for (StopOver stopOver : trip) {
+            for (StopOver stopOver : route.getStopOvers()) {
                 tripToString.append(" Location: " + stopOver.getLocationName())
                         .append(" arriving at: " + stopOver.getTimeOfArrival() + "\n");
             }
