@@ -7,6 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -69,6 +71,17 @@ public class OVappController
     @FXML private Button buttonFavoriteTravels;
     @FXML private Button buttonTravelHistory;
     @FXML private Button buttonFavorite;
+    @FXML protected TextField textFieldbeginstation;
+    @FXML protected TextField textFieldEndStation;
+    @FXML protected TextField textFieldStopover;
+    @FXML protected Button showInstructions;
+    @FXML protected Label labelStap1;
+    @FXML protected Label labelStap2;
+    @FXML protected Label labelStap3;
+    @FXML protected Label labelStap4;
+    @FXML protected Label labelStap5;
+    @FXML protected Label labelStap6;
+    @FXML protected Label labelStap7;
 
     public static boolean favoriteTrueHistoryFalse = true;
 
@@ -103,6 +116,8 @@ public class OVappController
         LocalTime beginTime = LocalTime.parse(spinnerTime.getValue().toString());
 
         textAreaSmall.setText(getCurrentVehicle().buildTripText(getCurrentVehicle().findTrip(beginStop, endStop, beginTime)));
+        textFieldbeginstation.setText(beginStop);
+        textFieldEndStation.setText(endStop);
 
         latestTraveledRoute();
 
@@ -115,6 +130,23 @@ public class OVappController
     @FXML protected void onButtonTravelHistory() {
         favoriteTrueHistoryFalse = false;
         OVapp.getInstance().loadFXML("TravelsGUI.fxml");
+    }
+
+    @FXML protected void onShowInfo(){
+        labelStap1.setVisible(!labelStap1.isVisible());
+        labelStap2.setVisible(!labelStap2.isVisible());
+        labelStap3.setVisible(!labelStap3.isVisible());
+        labelStap4.setVisible(!labelStap4.isVisible());
+        labelStap5.setVisible(!labelStap5.isVisible());
+        labelStap6.setVisible(!labelStap6.isVisible());
+        labelStap7.setVisible(!labelStap7.isVisible());
+
+        if (showInstructions.getText().equals("Toon instructies")){
+            showInstructions.setText("Verberg instructies");
+        } else {
+            showInstructions.setText("Toon instructies");
+        }
+
     }
 
     @FXML protected void onButtonFavorite() {
@@ -131,19 +163,19 @@ public class OVappController
         ObservableList<String> vehicleList = FXCollections.observableArrayList();
         vehicleList.addAll(vehicleMap.keySet());
         comboTransport.setItems(vehicleList);
-        comboTransport.getSelectionModel().select(1);
+
     }
     private void initComboA() {
         ObservableList<String> currentVehicleLocationList = FXCollections.observableArrayList();
         currentVehicleLocationList.addAll(getCurrentVehicle().getLocationMap().keySet());
         comboA.setItems(currentVehicleLocationList);
-        comboA.getSelectionModel().select(0);
+
     }
     private void initComboB() {
         ObservableList<String> currentVehicleLocationList = FXCollections.observableArrayList();
         currentVehicleLocationList.addAll(getCurrentVehicle().getLocationMap().keySet());
         comboB.setItems(currentVehicleLocationList);
-        comboB.getSelectionModel().select(1);
+
     }
     private void initSpinnerTime() {
         spinnerTime.setValueFactory(spinnerTimeController);

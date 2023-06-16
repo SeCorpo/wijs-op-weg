@@ -7,6 +7,8 @@ public class Route {
 
     private ArrayList<StopOver> stopOvers = new ArrayList<>();
 
+    private String routeImageFilePath;
+
     Route(Location beginLocation, LocalTime timeOfDeparture) {
         StopOver stopOver = new StopOver(beginLocation.getLocationName(), timeOfDeparture, timeOfDeparture);
         stopOvers.add(stopOver);

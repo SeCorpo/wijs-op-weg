@@ -1,0 +1,14 @@
+.my-class
+{
+    -fx-background-color: #004ac9;
+}
+
+.my-class:hover
+{
+    -fx-background-color: #cb0260;
+}
+
+.my-class:pressed
+{
+    -fx-background-color: #004ac9;
+}

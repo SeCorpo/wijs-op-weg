@@ -100,7 +100,7 @@ public class TravelsGUIController {
         long hours = travelDuration.toHours();
         long minutes = travelDuration.toMinutesPart();
 
-        return hours + " hours " + minutes + " minutes";
+        return hours + " uur en " + minutes + " minuten";
     }
 
     public void onDeleteTravels() {

@@ -101,24 +101,28 @@ public class Vehicle {
         }
     }
     public String buildTripText(Route route) {
-
-        if(route != null) {
-            System.out.println("@Vehicle.buildTripText, trip !=nul");
+        if (route != null) {
             StringBuilder tripToString = new StringBuilder();
-            tripToString.append("Route from: " + route.getStopOvers().get(0).getLocationName())
-                    .append(" to: " + route.getStopOvers().get(route.getStopOvers().size() - 1).getLocationName())
-                    .append(" at: " + route.getStopOvers().get(0).getTimeOfDeparture().toString() + "\n");
+            tripToString.append(String.format("Route van %s naar %s%n", route.getStopOvers().get(0).getLocationName(), route.getStopOvers().get(route.getStopOvers().size() - 1).getLocationName()))
+                    .append(System.lineSeparator())
+                    .append(String.format("Vertrektijd:       %s%n", route.getStopOvers().get(0).getTimeOfDeparture().toString()))
+                    .append(String.format("Beginstation:    %s%n", route.getStopOvers().get(0).getLocationName()));
 
-            for (StopOver stopOver : route.getStopOvers()) {
-                tripToString.append(" Location: " + stopOver.getLocationName())
-                        .append(" arriving at: " + stopOver.getTimeOfArrival() + "\n");
+            for (int i = 1; i < route.getStopOvers().size() - 1; i++) {
+                StopOver stopOver = route.getStopOvers().get(i);
+                tripToString.append(String.format("Tussenstop:      %s om %s%n", stopOver.getLocationName(), stopOver.getTimeOfArrival()));
             }
+
+            StopOver lastStopOver = route.getStopOvers().get(route.getStopOvers().size() - 1);
+            tripToString.append(String.format("Eindstation:      %s%n", lastStopOver.getLocationName()))
+                    .append(String.format("Aankomsttijd:   %s%n", lastStopOver.getTimeOfArrival()))
+                    .append(System.lineSeparator())
+                    .append("Wij wensen u een fijne reis!");
+
             String outputTrip = tripToString.toString();
             System.out.println(outputTrip);
             return outputTrip;
-        }
-        else {
-            System.out.println("@Vehicle.buildTripText, trip ==nul");
+        } else {
             return "Cannot build your trip";
         }
     }
