@@ -10,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -27,38 +28,20 @@
                         <Image url="@ovapplogo.png" />
                      </image>
                   </ImageView>
-                  <Label prefHeight="21.0" prefWidth="408.0" text="Stap 1 Maak hier een keuze uit" textFill="#093770">
-                     <VBox.margin>
-                        <Insets left="40.0" top="60.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="Verdana Bold" size="17.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="50.0" layoutY="350.0" prefHeight="21.0" prefWidth="408.0" text="uw favoriete trajecten" textFill="#093770">
-                     <font>
-                        <Font name="Verdana Bold" size="17.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="106.0" top="2.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label layoutX="50.0" layoutY="350.0" prefHeight="21.0" prefWidth="408.0" text="Stap 2 Bekijk de bijbehorende " textFill="#093770">
-                     <font>
-                        <Font name="Verdana Bold" size="17.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="40.0" top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label layoutX="116.0" layoutY="374.0" prefHeight="21.0" prefWidth="408.0" text="informatie van het traject" textFill="#093770">
-                     <font>
-                        <Font name="Verdana Bold" size="17.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="106.0" />
-                     </VBox.margin>
-                  </Label>
+                  <Pane prefHeight="210.0" prefWidth="409.0">
+                     <children>
+                        <Label fx:id="labelTravelsInfoStap1" layoutX="62.0" layoutY="76.0" prefHeight="59.0" prefWidth="285.0" text="Stap 1 Maak hier een keuze uit uw favoriete trajecten." wrapText="true">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelTravelsInfoStap2" layoutX="62.0" layoutY="151.0" prefHeight="59.0" prefWidth="285.0" text="Stap 2 Bekijk de bijbehorende informatie van het traject" wrapText="true">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
                </children>
             </VBox>
             <VBox prefHeight="700.0" prefWidth="792.0" style="-fx-background-color: ebebeb;">

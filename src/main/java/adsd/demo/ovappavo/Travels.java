@@ -25,10 +25,18 @@ public class Travels {
     static
     {
         //Amersfoort - Utrecht - Amsterdam
-            Route route = new Route(OVappController.getVehicleMap().get("Train").getLocationMap().get("Amersfoort"), LocalTime.of(12, 0));
-            route.addStopOver(OVappController.getVehicleMap().get("Train").getLocationMap().get("Utrecht"), LocalTime.of(12, 13), LocalTime.of(12, 21));
-            route.addEndPoint(OVappController.getVehicleMap().get("Train").getLocationMap().get("Amsterdam"), LocalTime.of(12, 47));
-            favoriteRoutes.add(route);
+        Route route = new Route(OVappController.getVehicleMap().get("Train").getLocationMap().get("Amersfoort"), LocalTime.of(12, 0));
+        route.addStopOver(OVappController.getVehicleMap().get("Train").getLocationMap().get("Utrecht"), LocalTime.of(12, 13), LocalTime.of(12, 21));
+        route.addEndPoint(OVappController.getVehicleMap().get("Train").getLocationMap().get("Amsterdam"), LocalTime.of(12, 47));
+        favoriteRoutes.add(route);
+
+        // Haarlem - Amsterdam - Utrecht - Nijmegen
+        Route route1 = new Route(OVappController.getVehicleMap().get("Train").getLocationMap().get("Haarlem"), LocalTime.of(15,2));
+        route1.addStopOver(OVappController.getVehicleMap().get("Train").getLocationMap().get("Amsterdam"), LocalTime.of(15,20), LocalTime.of(15,24));
+        route1.addStopOver(OVappController.getVehicleMap().get("Train").getLocationMap().get("Utrecht"), LocalTime.of(15,51), LocalTime.of(15,53));
+        route1.addEndPoint(OVappController.getVehicleMap().get("Train").getLocationMap().get("Nijmegen"), LocalTime.of(16, 47));
+        favoriteRoutes.add(route1);
+
     }
 
     //TRAVEL HISTORY
@@ -50,5 +58,12 @@ public class Travels {
         route2.addStopOver(OVappController.getVehicleMap().get("Train").getLocationMap().get("Utrecht"), LocalTime.of(8, 51), LocalTime.of(8, 53));
         route2.addEndPoint(OVappController.getVehicleMap().get("Train").getLocationMap().get("Nijmegen"), LocalTime.of(9, 47));
         travelHistory.add(route2);
+
+        // Haarlem - Amsterdam - Utrecht - Nijmegen
+        Route route3 = new Route(OVappController.getVehicleMap().get("Train").getLocationMap().get("Haarlem"), LocalTime.of(15,2));
+        route3.addStopOver(OVappController.getVehicleMap().get("Train").getLocationMap().get("Amsterdam"), LocalTime.of(15,20), LocalTime.of(15,24));
+        route3.addStopOver(OVappController.getVehicleMap().get("Train").getLocationMap().get("Utrecht"), LocalTime.of(15,51), LocalTime.of(15,53));
+        route3.addEndPoint(OVappController.getVehicleMap().get("Train").getLocationMap().get("Nijmegen"), LocalTime.of(16, 47));
+        travelHistory.add(route3);
     }
 }

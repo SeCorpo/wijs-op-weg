@@ -11,6 +11,7 @@ import javafx.util.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
 import java.util.TreeMap;
@@ -77,6 +78,7 @@ public class OVappController
         initComboA();
         initComboB();
         initSpinnerTime();
+        timeSpinnerUserInput();
 
         System.out.println("OVappController - initialize done");
     }
@@ -186,5 +188,16 @@ public class OVappController
         } catch(Exception e) {
             System.out.println("There are no recent travels\n");
         }
+    }
+    private void timeSpinnerUserInput() {
+        spinnerTime.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                LocalTime parsedTime = LocalTime.parse(newValue, DateTimeFormatter.ofPattern("HH:mm"));
+
+                spinnerTimeController.setValue(parsedTime);
+            } catch(Exception e) {
+//                System.out.println("Cannot parse " + newValue + " to LocalTime");
+            }
+        });
     }
 }

@@ -23,6 +23,8 @@ public class TravelsGUIController {
     @FXML protected TextField textFieldTravelsStopsCount;
     @FXML protected TextField textFieldTravelsMiddleStops;
     @FXML protected TextField textFieldTravelsTravelTime;
+    @FXML protected Label labelTravelsInfoStap1;
+    @FXML protected Label labelTravelsInfoStap2;
 
     public void initialize() {
         if(OVappController.favoriteTrueHistoryFalse) {
@@ -50,12 +52,15 @@ public class TravelsGUIController {
     private void initHistoryRoutes() {
         labelTravelsFavoriteHistory.setText("Reisgeschiedenis");
         buttonTravelsFavoriteHistory.setText("Favoriete Routes");
+        labelTravelsInfoStap1.setText("Stap 1 Maak hier een keuze uit uw bereisde trajecten");
+
         loadTableView(Travels.getTravelHistory());
         OVappController.favoriteTrueHistoryFalse = true;
     }
     private void initFavoriteRoutes() {
         labelTravelsFavoriteHistory.setText("Favoriete Routes");
         buttonTravelsFavoriteHistory.setText("Reisgeschiedenis");
+        labelTravelsInfoStap1.setText("Stap 1 Maak hier een keuze uit uw favoriete trajecten");
 
         loadTableView(Travels.getFavoriteRoutes());
         OVappController.favoriteTrueHistoryFalse = false;
@@ -64,11 +69,11 @@ public class TravelsGUIController {
     private void setupTravelsInfo() {
         textFieldTravelsBeginStation.setText(tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().get(0).getLocationName());
         textFieldTravelsEndStation.setText(tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().get(tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().size() - 1).getLocationName());
-        textFieldTravelsStopsCount.setText(String.valueOf(tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().size()));
+        textFieldTravelsStopsCount.setText(String.valueOf(tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().size()-2));
 
         StringBuilder middleStops = new StringBuilder();
         for(int i = 1; i < tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().size()-1; i++) {
-            middleStops.append(tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().get(i).getLocationName() + " ");
+            middleStops.append(tableViewTravels.getSelectionModel().getSelectedItem().getStopOvers().get(i).getLocationName() + "; ");
         }
         textFieldTravelsMiddleStops.setText(middleStops.toString());
 
@@ -96,5 +101,28 @@ public class TravelsGUIController {
         long minutes = travelDuration.toMinutesPart();
 
         return hours + " hours " + minutes + " minutes";
+    }
+
+    public void onDeleteTravels() {
+        try {
+            if (OVappController.favoriteTrueHistoryFalse) {
+                Travels.getFavoriteRoutes().remove(tableViewTravels.getSelectionModel().getSelectedItem());
+//                initialize();
+            } else if (!OVappController.favoriteTrueHistoryFalse) {
+                Travels.getTravelHistory().remove(tableViewTravels.getSelectionModel().getSelectedItem());
+//                initialize();
+            }
+        } catch(Exception e) {
+            System.out.println("Please select a route to delete");
+            alertNothingSelectedToDelete();
+        }
+    }
+
+    // ALERTS
+    private void alertNothingSelectedToDelete() {
+        Alert registerIncorrect = new Alert(Alert.AlertType.WARNING);
+        registerIncorrect.setTitle("No route selected");
+        registerIncorrect.setContentText("Please select a route to delete");
+        registerIncorrect.show();
     }
 }

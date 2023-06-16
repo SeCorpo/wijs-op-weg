@@ -60,10 +60,13 @@ public class Vehicle {
 
                 if (endLocationFound) {
                     LocalTime stopOverDepartureTime = beginStopOver.getTimeOfDeparture();
-                    if (stopOverDepartureTime.isAfter(beginTime) && stopOverDepartureTime.isBefore(beginTime.plusMinutes(30))) {
+                    if (beginTime.equals(stopOverDepartureTime)) {
+                        beginTimeFound = true;
+                        System.out.println("Time is timeOfDeparture");
+                    } else if (stopOverDepartureTime.isAfter(beginTime) && stopOverDepartureTime.isBefore(beginTime.plusMinutes(30))) {
                         beginTimeFound = true;
                         System.out.println("Time is after timeOfDeparture & before +30 min");
-                    } else if (stopOverDepartureTime.isAfter(beginTime) && stopOverDepartureTime.isBefore(beginTime.plusHours(1))) {
+                    } else if (stopOverDepartureTime.isAfter(beginTime) && stopOverDepartureTime.isBefore(beginTime.plusMinutes(60))) {
                         beginTimeFound = true;
                         System.out.println("Time is after timeOfDeparture & before +60 min");
                     }
